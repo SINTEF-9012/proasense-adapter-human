@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2014-2015 SINTEF
  *
- *     Brian Elvesæter <brian.elvesater@sintef.no>
+ *     Brian Elvesï¿½ter <brian.elvesater@sintef.no>
  *     Shahzad Karamat <shazad.karamat@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,12 +42,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+// test GIT
 @Path("/humansensorserver")
 public class HumanSensorServer extends ProaSenseBaseAdapter {
 
 	ArrayList al = new ArrayList();
-	
+
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -80,14 +80,14 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 
 		return Response.status(201).entity(text).build();
 	}
-	
+
 
 	private SimpleEvent convertToSimpleEvent(String text){
 		String[] splitText = text.split("-");
 		String[] sensorValues = splitText[0].split(",");
 		String[] valueTypes = splitText[1].split(",");
 		String sensorId = valueTypes[0];
-		
+
 	//	System.out.println(sensorId);
 	//	System.out.println(sensorValues[1]);
 	//	System.out.println(valueTypes[0]);
@@ -133,7 +133,7 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 		Date date = new Date();
 		String sensorTime = dateFormat.format(date);
         long timestamp = new DateTime(sensorTime).getMillis();
-		
+
 		SimpleEvent event = new SimpleEvent();
 		event.setTimestamp(timestamp);
         event.setSensorId(sensorId);
