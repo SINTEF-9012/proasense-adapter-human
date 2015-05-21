@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after*      these tags -->
+    <title>Human Sensor</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <div class="container">
+        <div>
+            <h3>Human Sensor Form</h3>
+        </div>
+    </div>
+    <hr>
+</head>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+<body>
+
+    <div class="container">
+        <div class="well">
+            <h5>Sensors:</h5>
+
+            <div class="input-group-btn select" id="selectSensor">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="selected">Sensor #</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation" id="1"><a role="menuitem" tabindex="-1" href="#">Sensor#1</a>
+                    </li>
+                    <li role="presentation" id="2"><a role="menuitem" tabindex="-1" href="#">Sensor#2</a>
+                    </li>
+                    <li role="presentation" id="3"><a role="menuitem" tabindex="-1" href="#">Sensor#3</a>
+                    </li>
+                    <li role="presentation" id="4"><a role="menuitem" tabindex="-1" href="#">Sensor#4</a>
+                    </li>
+                    <li role="presentation" id="5"><a role="menuitem" tabindex="-1" href="#">Sensor#5</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <hr5>Properties:</hr5>
+        <br>
+        <br>
+          <form action="" method="post"><!-- sender data til en serveradresse, den må gis for action attr.-->
+        <div class="input_fields_wrap">
+          
+            <button class="add_field_button" onclick="checkSensor()">Add Properties</button>
+            <br>
+            <br>
+            <span style="padding-left:100px;">#</span>
+            <span style="padding-left:70px;">Property key</span>
+            <span style="padding-left:70px;">Property value</span>
+            <span style="padding-left:60px;">Property type</span>             
+        </div>
+
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+   </form>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+
+    $(document).ready(function () {
+        var max_fields = 20; //maximum input boxes allowed
+        var wrapper = $(".input_fields_wrap"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+        var sensorNumber;
+
+        var sensor = 1;
+        var increment = 1;
+        var x = 1; //initlal text box count
+        $(add_button).click(function (e) { //on add input button click
+            e.preventDefault();
+            if (x < max_fields) { //max input box allowed
+                x++; //text box increment
+
+                $(wrapper).append('<div class="well"><input type="text" readonly="readonly" value=' + increment + ' name="mytext[]" style="margin-right:10px; float:left" class="field"/><input readonly = "readonly" type="text" value="sensor#'+ sensorNumber +'.property#' + increment + ' "name="mytext[]" style="margin-right:10px;float:left" class="field"/><input type="text" name="mytext[]" style="margin-right:10px;float:left" class="field"/><div class="input-group-btn select" id="selectType' + x + '"><  style="width:200px;valign:top;float:left"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="selected">Choose type</span><span class="caret"></span></button><ul class="dropdown-menu" role="menu"  aria-labelledby="menu1"><li role="presentation" id="long' + increment + '"><a role="menuitem" tabindex="-1" href="#">LONG</a></li><li role="presentation" id="string' + increment + '"><a role="menuitem" tabindex="-1" href="#">STRING</a></li><li role="presentation" id="double' + increment + '"><a role="menuitem" tabindex="-1" href="#">DOUBLE</a></li><li role="presentation" id="blob' + increment++ +'"><a role="menuitem" tabindex="-1" href="#">BLOB</a></li></ul></div> <a href="#"class="remove_field" style="float:left;">Remove</a><hr></div>');
+
+            }
+        });
+
+        $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+            increment--;
+        })
+
+        //for select box(dropdown box) : Note: make sure you have different id for each dropdown
+        $('body').on('click', '.dropdown-menu li', function () {
+
+
+            var i = $(this).parents('.select').attr('id');//id på foreldrenoden med listen i.
+            var v = $(this).children().text(); // tekst i sensoren som vises på skjermen.
+            var o = $(this).attr('id'); // id i sensoren.
+            if(i == "selectSensor"){
+                sensorNumber = o;
+            }
+            $('#' + i + ' .selected').attr('id', o);
+            $('#' + i + ' .selected').text(v);
+
+        });
+        
+		
+		//$('#post').click(function(values){
+        function sendRequest(values){
+				var request = new XMLHttpRequest();
+				//alert('post');
+				request.open('POST', 'http://localhost:8080/HumanSensor/webapi/minklasse', false);
+				request.setRequestHeader("Content-Type", "application/json");
+				request.send(values);
+			//	alert('post2');
+		
+				document.writeln(request.responseText);
+			  }
+              
+    var selectedDropdown = [];
+    $('#submit').click(function(){
+                                 
+        var answers = [];
+        $.each($('.field'), function() {
+            answers.push($(this).val());
+        });
+        
+   /*       $.each($('.dropdown-menu'), function() { // mangler field i alle feltene over, derfor får vi ikke noen verdi i arrayen.
+                answers.push($(this).val());
+            }); */
+        
+        $.each($('.selected'), function() {
+        	selectedDropdown.push($(this).text());  // må bruke text() og ikke val() for at den skal fungere.
+        	//alert($('.selected').text());
+        	//alert(selectedDropdown.toString());
+        });
+         
+        if(answers.length == 0) {
+            answers = "none";
+        }  
+        
+        sendRequest(answers.toString()+"-"+selectedDropdown.toString());
+         
+        return false;
+                                     
+        });
+
+
+    });
+</script>
