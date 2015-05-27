@@ -10,7 +10,20 @@
     <inceptionYear>2015</inceptionYear>
     <url>http://www.proasense.eu</url>
 
+    <repositories>
+        <repository>
+            <id>archiva.public</id>
+            <name>Nissatech Public Repository</name>
+            <url>http://maven.nissatech.com/repository/public/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <dependency>
+            <groupId>eu.proasense.internal</groupId>
+            <artifactId>thrift-messages</artifactId>
+            <version>0.3</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
