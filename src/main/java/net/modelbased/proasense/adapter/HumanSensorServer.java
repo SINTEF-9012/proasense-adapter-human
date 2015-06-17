@@ -21,26 +21,19 @@ package net.modelbased.proasense.adapter;
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
 
-import org.joda.time.DateTime;
-
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 // test GIT
 @Path("/humansensorserver")
@@ -48,10 +41,14 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 
 	ArrayList al = new ArrayList();
 
+
 	@POST
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response HumanSensorServer(String text){
+
+	//	System.out.println(text);
+
 		String zooKeeper = "89.216.116.44:2181";
 		String topic = "proasense.datainfrastructure.mhwirth.all";
 
@@ -132,10 +129,10 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		Date date = new Date();
 		String sensorTime = dateFormat.format(date);
-        long timestamp = new DateTime(sensorTime).getMillis();
+       // long timestamp = new DateTime(sensorTime).getMillis();
 
 		SimpleEvent event = new SimpleEvent();
-		event.setTimestamp(timestamp);
+		//event.setTimestamp(timestamp);
         event.setSensorId(sensorId);
         event.setEventProperties(properties);
 

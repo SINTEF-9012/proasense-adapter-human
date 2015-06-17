@@ -17,10 +17,7 @@
  */
 package net.modelbased.proasense.adapter;
 
-import eu.proasense.internal.SimpleEvent;
-
 import kafka.producer.ProducerConfig;
-
 import org.apache.kafka.clients.producer.KafkaProducer;
 
 import java.util.Properties;
