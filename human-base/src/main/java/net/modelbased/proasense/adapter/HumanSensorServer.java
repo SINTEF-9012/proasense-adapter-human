@@ -88,10 +88,6 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 		String[] valueTypes = splitText[1].split(",");
 		String sensorId = valueTypes[0];
 
-	//	System.out.println(sensorId);
-	//	System.out.println(sensorValues[1]);
-	//	System.out.println(valueTypes[0]);
-
 		// Process event properties
 		Map<String, ComplexValue> properties = new HashMap<String, ComplexValue>();
 
@@ -99,10 +95,6 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 		int n = 1;
 		for (int i = 0; i < sensorValues.length; i++) {
 			i++;
-
-//			processedValues = sensorValues[i++]+",";
-//			processedValues += sensorValues[i]+",";
-//          processedValues += valueTypes[n++];
 
             String propertyKey = sensorValues[i++];
             String propertyValue = sensorValues[i];
@@ -112,7 +104,6 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 			ComplexValue value = new ComplexValue();
 			value.setValue(propertyValue);
 
-			// if statement to check for proper value type
             if (propertyType.matches("LONG")) {
                 value.setType(VariableType.LONG);
             }
@@ -132,10 +123,8 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		Date date = new Date();
 		String sensorTime = dateFormat.format(date);
-       // long timestamp = new DateTime(sensorTime).getMillis();
 
 		SimpleEvent event = new SimpleEvent();
-		//event.setTimestamp(timestamp);
         event.setSensorId(sensorId);
         event.setEventProperties(properties);
 

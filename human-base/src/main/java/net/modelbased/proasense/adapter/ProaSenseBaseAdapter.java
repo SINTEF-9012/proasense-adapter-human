@@ -19,11 +19,15 @@ package net.modelbased.proasense.adapter;
 
 import kafka.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.log4j.Logger;
 
 import java.util.Properties;
 
 
 public abstract class ProaSenseBaseAdapter {
+
+    public final static Logger logger = Logger.getLogger(ProaSenseBaseAdapter.class);
+
 	protected KafkaProducer<String, byte[]> producer;
 
 	public ProaSenseBaseAdapter() {}

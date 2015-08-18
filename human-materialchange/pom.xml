@@ -33,20 +33,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <finalName>proasense-adapter-human-base</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <url>http://localhost:8080/bootstrap-3.3.4-dist/HumanSensorAdapter.html</url>
-                    <server>TomcatServer</server>
-                    <path>/webapi</path>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>

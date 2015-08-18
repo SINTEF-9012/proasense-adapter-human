@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
  * Created by shahzad on 15.08.15.
  */
 // The Java class will be hosted at the URI path "/helloworld"
-@Path("/hallo")
+@Path("/certificateForm")
 public class MaterialCertificateServer extends AbstractBaseAdapter {
     // The Java method will process HTTP GET requests
 

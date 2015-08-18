@@ -17,7 +17,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <div class="container">
-    <h3>Material certificate form</h3>
+    <h3>Material change form</h3>
   </div>
 </head>
 <body>
@@ -32,41 +32,20 @@
 
 
       <div class="dropdown">
-         <span>
-                  <select class="readable_value">
+                    <input type="number" step="any" placeholder="Machine ID" class="readable_value">
+
+                    <select class="readable_value">
                     <option value="Makrolon">Makrolon</option>
                     <option value="Lexan">Lexan</option>
                     <option value="Default_value" selected>Product type field</option>
-                  </select>
+                    </select>
 
-            <input type="text" placeholder="Order number" required class="readable_value">
-          </span>
       </div>
       <br>
 
-
-      <div>
-
-        <select class="readable_value">
-          <option value="ISO 1133">ISO 1133</option>
-          <option value="Default_value" selected >Method field</option>
-        </select>
-
-
-        <input type="number" step="any" placeholder="Average" class="readable_value" style="margin-left: 27px;">
-
-        <input type="number" step="any" placeholder="Min value" class="readable_value">
-
-        <input type="number" step="any" placeholder="Max value" class="readable_value">
-
-      </div>
     </div>
     <button id="submit" type="submit">Submit</button>
-    <span>Show last submitted form?
-      <select class="readable_value">
-      <option value="true">true</option>
-      <option value="false" selected >false</option>
-    </select>
+
   </div>
 
   </div>
@@ -82,7 +61,7 @@
     function sendRequest(field_values){
       var request = new XMLHttpRequest();
 
-      request.open('POST', 'http://localhost:8080/adapter/certificateForm', false);
+      request.open('POST', 'http://localhost:8080/adapter/changeForm', false);
       request.setRequestHeader("Content-Type", "application/json");
       request.send(field_values);
     }
