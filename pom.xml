@@ -26,6 +26,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.SINTEF-9012</groupId>
+            <artifactId>proasense-adapter-base</artifactId>
+            <version>93c7eff5846a25d258c49f38de0afea6e886fcb3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+        <dependency>
             <groupId>eu.proasense.internal</groupId>
             <artifactId>thrift-messages</artifactId>
             <version>0.4</version>

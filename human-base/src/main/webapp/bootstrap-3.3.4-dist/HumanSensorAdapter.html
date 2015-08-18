@@ -120,13 +120,11 @@
 		//$('#post').click(function(values){
         function sendRequest(values){
 				var request = new XMLHttpRequest();
-				alert('post');
+
 				request.open('POST', 'http://localhost:8080/webapi/humansensorserver', false);
 				request.setRequestHeader("Content-Type", "application/json");
 				request.send(values);
-				alert('post2');
 
-				//document.writeln(request.responseText);
 			  }
 
     var selectedDropdown = [];
