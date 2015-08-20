@@ -40,6 +40,14 @@
                     <path>/webapi</path>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <warSourceDirectory>src/main/web</warSourceDirectory>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

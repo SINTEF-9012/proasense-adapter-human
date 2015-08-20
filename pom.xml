@@ -22,6 +22,11 @@
             <name>Nissatech Public Repository</name>
             <url>http://maven.nissatech.com/repository/public/</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <name>JitPack</name>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -88,7 +93,6 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
