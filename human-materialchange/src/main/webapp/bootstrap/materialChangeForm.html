@@ -32,7 +32,14 @@
 
 
       <div class="dropdown">
-                    <input type="number" step="any" placeholder="Machine ID" class="readable_value">
+                    <select class="readable_value">
+                      <option value="IMM1: 6128649">IMM1: 6128649</option>
+                      <option value="IMM2: 6128634">IMM2: 6128634</option>
+                      <option value="IMM3: 6128630">IMM3: 6128630</option>
+                      <option value="IMM4: 6154722">IMM4: 6154722</option>
+                      <option value="IMM5: 6154721">IMM5: 6154721</option>
+                      <option value="Default_value" selected>Choose maschine</option>
+                    </select>
 
                     <select class="readable_value">
                     <option value="Makrolon">Makrolon</option>
@@ -76,10 +83,7 @@
       sendRequest(answers.toString());
 
       $('#Human_form').reset();
-
     })
-
-
   })
 
 </script>
