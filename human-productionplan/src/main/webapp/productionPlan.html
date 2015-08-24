@@ -23,11 +23,11 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 
-<div class="container">
-  <h3>Production plan form</h3>
+
+  <h3 style="margin-left: 30px">Production plan form</h3>
   <div class="well">
 
-    <table class="table table-responsive">
+    <table class="table table-responsive" id="Production_plan_form">
 
 
       <thead>
@@ -58,7 +58,7 @@
               <option value="Lexan">Delta 1</option>
               <option value="Default_value" selected>Select type</option>
             </select>
-            Time: <input type="time" class="readable_value" style="height: 20px; width: 50px;">
+            Time: <input type="time" class="readable_value" style="height: 20px; width: 80px;">
           </div>
 
           <div class="dropdown">
@@ -71,7 +71,7 @@
               <option value="Lexan">Delta 1</option>
               <option value="Default_value" selected>Select type</option>
             </select>
-            Time: <input type="time" class="readable_value" style="height: 20px; width: 50px;">
+            Time: <input type="time" class="readable_value" style="height: 20px; width: 80px;">
           </div></td>
 
         <td id="1-2"></td>
@@ -129,7 +129,7 @@
 
     <input type="button" value="submit"/>
   </div>
-</div>
+
 </body>
 </html>
 
@@ -143,4 +143,20 @@
       $('#'+i+'-' + k).html(form);
     }
   }
+
+  $(document).ready(function(){
+
+    $('#submit').click(function () {
+
+      var answers = [];
+      $.each($('.readable_value'), function() {
+        answers.push($(this).val());
+      });
+
+
+      $('#Production_plan_form').reset();
+    })
+
+  })
+
 </script>
