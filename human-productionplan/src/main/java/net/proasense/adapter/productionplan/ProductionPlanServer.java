@@ -1,14 +1,6 @@
 package net.proasense.adapter.productionplan;
 
-import eu.proasense.internal.ComplexValue;
-import eu.proasense.internal.SimpleEvent;
-import eu.proasense.internal.VariableType;
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -20,7 +12,7 @@ import javax.ws.rs.core.MediaType;
  */
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/productionPlan")
-public class ProductionPlanServer extends AbstractBaseAdapter {
+public class ProductionPlanServer {
     // The Java method will process HTTP GET requests
 
     @POST
@@ -30,6 +22,11 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
 
         String allValues[] = text.split(",");
 
+        String sensorId = allValues[0];
+        long timestamp = System.currentTimeMillis();
+        int shiftid_value = 4;
+        String productId = allValues[1];
+/*
         ComplexValue complexValue = new ComplexValue();
         // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
@@ -54,7 +51,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         simpleEvent.putToEventProperties("materialId", complexValue);
 
 
-        this.outputPort.publishSimpleEvent(simpleEvent);
+        this.outputPort.publishSimpleEvent(simpleEvent);*/
 
     }
 }

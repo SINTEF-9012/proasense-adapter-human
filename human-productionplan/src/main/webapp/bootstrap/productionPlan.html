@@ -23,11 +23,11 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 
-
+<form id="Production_plan_form">
   <h3 style="margin-left: 30px">Production plan form</h3>
   <div class="well">
 
-    <table class="table table-responsive" id="Production_plan_form">
+    <table class="table table-responsive">
 
 
       <thead>
@@ -50,29 +50,30 @@
         <td id="1-1">
           <div class="dropdown">
             <select class="readable_value">
-              <option value="Makrolon">X82</option>
-              <option value="Lexan">Delta 3</option>
-              <option value="Makrolon">HFE</option>
-              <option value="Lexan">Nova Insignia</option>
-              <option value="Makrolon">Corsa 1</option>
-              <option value="Lexan">Delta 1</option>
+              <option value="X82">X82</option>
+              <option value="Delta 3">Delta 3</option>
+              <option value="HFE">HFE</option>
+              <option value="Nova Insignia">Nova Insignia</option>
+              <option value="Corsa 1">Corsa 1</option>
+              <option value="Delta 1">Delta 1</option>
               <option value="Default_value" selected>Select type</option>
             </select>
             Time: <input type="time" class="readable_value" style="height: 20px; width: 80px;">
           </div>
 
-          <div class="dropdown">
-            <select class="readable_value">
-              <option value="Makrolon">X82</option>
-              <option value="Lexan">Delta 3</option>
-              <option value="Makrolon">HFE</option>
-              <option value="Lexan">Nova Insignia</option>
-              <option value="Makrolon">Corsa 1</option>
-              <option value="Lexan">Delta 1</option>
+          <div class="dropdown" id="test">
+            <select id="select1" class="readable_value" onchange="selectedField(this);">
+              <option value="X82">X82</option>
+              <option value="Delta 3">Delta 3</option>
+              <option value="HFE">HFE</option>
+              <option value="Nova Insignia">Nova Insignia</option>
+              <option value="Corsa 1">Corsa 1</option>
+              <option value="Delta 1">Delta 1</option>
               <option value="Default_value" selected>Select type</option>
             </select>
-            Time: <input type="time" class="readable_value" style="height: 20px; width: 80px;">
-          </div></td>
+            Time: <input id="field-two" type="time" class="readable_value" style="height: 20px; width: 80px; display: initial">
+          </div>
+        </td>
 
         <td id="1-2"></td>
         <td id="1-3"></td>
@@ -126,10 +127,13 @@
       </tbody>
     </table>
 
+    <textarea id="textbox" rows="4" cols="50" placeholder="Write your comments here.">
+    </textarea>
 
-    <input type="button" value="submit"/>
+    <br>
+    <input type="button" value="submit" id="submit"/>
   </div>
-
+</form>
 </body>
 </html>
 
@@ -144,17 +148,41 @@
     }
   }
 
+  function selectedField(select_field){
+
+  }
+
   $(document).ready(function(){
+
+    function sendRequest(id, values){
+      var request = new XMLHttpRequest();
+
+      request.open('POST', 'http://localhost:8080/adapter/productionPlan', false);
+      request.setRequestHeader("Content-Type", "application/json");
+      request.send(id, values);
+    }
 
     $('#submit').click(function () {
 
       var answers = [];
+      var names = ["KM 1000/1 61282649/001", "KM 1000/2 61282634/001", "KM 1000/3 61282630/001", "ENGEL 1700/4 61542722/001", "ENGEL 1700/5 61542721/001"];
+
       $.each($('.readable_value'), function() {
+
         answers.push($(this).val());
       });
 
+      var n = 0;
+      for(i = 0; i < 5; i++){
+        var csv = "";
+        for(k = 0; k < 16; k++) {
+          csv+= answers[n++]+",";
+        }
 
-      $('#Production_plan_form').reset();
+        sendRequest(names[i]+","+csv);
+      }
+
+        document.getElementById("Production_plan_form").reset();
     })
 
   })
