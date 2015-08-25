@@ -14,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by shahzad on 15.08.15.
@@ -26,7 +27,7 @@ public class MaterialChangeServer extends AbstractBaseAdapter {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public void convertToSimpleEvents(String text){
+    public Response convertToSimpleEvents(String text){
 
         String allValues[] = text.split(",");
 
@@ -54,7 +55,10 @@ public class MaterialChangeServer extends AbstractBaseAdapter {
         complexValue.setType(VariableType.STRING);
         simpleEvent.putToEventProperties("materialId", complexValue);
 
+        System.out.println("før sending.");
         this.outputPort.publishSimpleEvent(simpleEvent);
+        System.out.println("etter sending.");
 
+        return Response.status(201).entity(text).build();
     }
 }

@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+
+  <title>Human Sensor</title>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Human Sensor</title>
+
+  <!-- Bootstrap
+  <link href="css/bootstrap.min.css" rel="stylesheet"> -->
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +26,7 @@
   </div>
 </head>
 <body>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -31,37 +37,71 @@
     <div class="well" id="field-root">
 
 
-      <div class="dropdown">
-                    <select class="readable_value">
-                      <option value="IMM1: 6128649">IMM1: 6128649</option>
-                      <option value="IMM2: 6128634">IMM2: 6128634</option>
-                      <option value="IMM3: 6128630">IMM3: 6128630</option>
-                      <option value="IMM4: 6154722">IMM4: 6154722</option>
-                      <option value="IMM5: 6154721">IMM5: 6154721</option>
-                      <option value="Default_value" selected>Choose maschine</option>
-                    </select>
+      <table style="width:75%" class="table table-bordered">
+        <thead>
+        <tr style="background-color: #9acfea">
+          <th>Machine</th>
+          <th>Makrolon</th>
+          <th>Lexan</th>
+        </tr>
+        </thead>
 
-                    <select class="readable_value">
-                    <option value="Makrolon">Makrolon</option>
-                    <option value="Lexan">Lexan</option>
-                    <option value="Default_value" selected>Product type field</option>
-                    </select>
+        <tbody id="parent">
+        <tr id="1" class="hidden2">
+          <td style="background-color: red">KM 1000/1
+            <br>
+            61282649/001</td>
+          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+        </tr>
 
-      </div>
+        <tr id="2" >
+          <td style="background-color: orange">KM 1000/2
+            <br>
+            61282634/001</td>
+          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+        </tr>
+
+        <tr id="3" >
+          <td style="background-color: lightgreen">KM 1000/3
+            <br>
+            61282630/001</td>
+          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+        </tr>
+
+        <tr id="4">
+          <td style="background-color: lightskyblue">ENGEL 1700/4
+            <br>
+            61542722/001</td>
+          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+        </tr>
+
+        <tr  id="5" class="flash">
+          <td style="background-color: lightgray">ENGEL 1700/5
+            <br>
+            61542721/001</td>
+          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+        </tr>
+
+
+        </tbody>
+      </table>
       <br>
 
     </div>
-    <button id="submit" type="submit">Submit</button>
-
   </div>
 
-  </div>
 </form>
 
 </body>
 </html>
 
 <script>
+
 
   $(document).ready(function() {
 
@@ -73,18 +113,28 @@
       request.send(field_values);
     }
 
-    $('#submit').click(function () {
+    $('button').click(function(){
 
-      var answers = [];
-      $.each($('.readable_value'), function() {
-        answers.push($(this).val());
-      });
+      $(this).parent().css("backgroundColor", "lightblue");
 
-      sendRequest(answers.toString());
 
-      $('#Human_form').reset();
-    })
-  })
+      var confirmed  = false;
+      confirmed =  myFunction();
+
+      if(confirmed){
+
+        var id =  $(this).closest('tr').attr('id');
+        var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
+        var materialId = $(this).attr('value');
+
+        sendRequest(machineNames[id-1]+","+materialId);
+      }
+    });
+
+    function myFunction() {
+      return confirm("Proceed?");
+    }
+  });
 
 </script>
 
