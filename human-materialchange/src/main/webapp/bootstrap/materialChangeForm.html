@@ -117,23 +117,15 @@
 
       $(this).parent().css("backgroundColor", "lightblue");
 
-
-      var confirmed  = false;
-      confirmed =  myFunction();
-
-      if(confirmed){
-
         var id =  $(this).closest('tr').attr('id');
         var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
         var materialId = $(this).attr('value');
+      $(this).html('<>');
 
         sendRequest(machineNames[id-1]+","+materialId);
-      }
+
     });
 
-    function myFunction() {
-      return confirm("Proceed?");
-    }
   });
 
 </script>
