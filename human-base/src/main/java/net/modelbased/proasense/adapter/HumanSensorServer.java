@@ -21,6 +21,7 @@ package net.modelbased.proasense.adapter;
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
+import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
@@ -40,7 +41,7 @@ import java.util.Map;
 
 // test GIT
 @Path("/humansensorserver")
-public class HumanSensorServer extends ProaSenseBaseAdapter {
+public class HumanSensorServer extends AbstractBaseAdapter {
 
 	ArrayList al = new ArrayList();
 
@@ -52,11 +53,11 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 
 		System.out.println(text);
 
-		String zooKeeper = "89.216.116.44:2181";
-		String topic = "proasense.datainfrastructure.mhwirth.all";
+//		String zooKeeper = "89.216.116.44:2181";
+//		String topic = "proasense.datainfrastructure.mhwirth.all";
 
 		// Create the Kakfa producer
-		producer = createProducer(zooKeeper);
+//		producer = createProducer(zooKeeper);
 
 		try {
 			// Convert to simple event
@@ -64,18 +65,20 @@ public class HumanSensorServer extends ProaSenseBaseAdapter {
 			System.out.println("SimpleEvent: " + event.toString());
 
 			// Serialize message
-			TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
-			byte[] bytes = serializer.serialize(event);
+//			TSerializer serializer = new TSerializer(new TBinaryProtocol.Factory());
+//			byte[] bytes = serializer.serialize(event);
 
 			// Publish message
-			ProducerRecord<String, byte[]> message = new ProducerRecord<String, byte[]>(topic, bytes);
-			producer.send(message);
+//			ProducerRecord<String, byte[]> message = new ProducerRecord<String, byte[]>(topic, bytes);
+//			producer.send(message);
+			this.outputPort.publishSimpleEvent(event);
 		}
-		catch (TException ignore) {
-
-		}
+//		catch (TException ignore) {
+//
+//		}
 		finally {
-			producer.close();
+//			producer.close();
+			this.outputPort.close();
 		}
 
 		return Response.status(201).entity(text).build();
