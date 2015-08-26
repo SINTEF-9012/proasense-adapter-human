@@ -31,7 +31,7 @@ public class MaterialChangeServer extends AbstractBaseAdapter {
 
         String allValues[] = text.split(",");
 
-        System.out.println("allValues[0] er "+allValues[0]+" allValues[1] er "+allValues[1]);
+        //System.out.println("allValues[0] er "+allValues[0]+" allValues[1] er "+allValues[1]);
         ComplexValue complexValue = new ComplexValue();
         // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();

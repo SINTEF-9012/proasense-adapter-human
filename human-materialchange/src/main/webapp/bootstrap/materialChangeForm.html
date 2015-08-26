@@ -51,40 +51,40 @@
           <td style="background-color: red">KM 1000/1
             <br>
             61282649/001</td>
-          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr id="2" >
           <td style="background-color: orange">KM 1000/2
             <br>
             61282634/001</td>
-          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr id="3" >
           <td style="background-color: lightgreen">KM 1000/3
             <br>
             61282630/001</td>
-          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr id="4">
           <td style="background-color: lightskyblue">ENGEL 1700/4
             <br>
             61542722/001</td>
-          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr  id="5" class="flash">
           <td style="background-color: lightgray">ENGEL 1700/5
             <br>
             61542721/001</td>
-          <td align="center"><button value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
 
@@ -103,30 +103,35 @@
 <script>
 
 
+
   $(document).ready(function() {
 
     function sendRequest(field_values){
+
       var request = new XMLHttpRequest();
 
       request.open('POST', 'http://localhost:8080/adapter/changeForm', false);
+
       request.setRequestHeader("Content-Type", "application/json");
+
       request.send(field_values);
+
     }
 
+    var prevId = "";
     $('button').click(function(){
 
-      $(this).parent().css("backgroundColor", "lightblue");
+      $(prevId).css('backgroundColor', '');
 
-        var id =  $(this).closest('tr').attr('id');
-        var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
-        var materialId = $(this).attr('value');
-      $(this).html('<>');
+      $(this).css('backgroundColor', 'lightgreen');
 
-        sendRequest(machineNames[id-1]+","+materialId);
+      var id =  $(this).closest('tr').attr('id');
+      var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
 
+      var materialId = $(this).attr('value');
+      sendRequest(machineNames[id-1]+","+materialId);
+      prevId = $(this);
     });
-
   });
 
 </script>
-
