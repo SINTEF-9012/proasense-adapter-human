@@ -1,7 +1,16 @@
 package net.proasense.adapter.productionplan;
 
-import javax.ws.rs.*;
+import eu.proasense.internal.ComplexValue;
+import eu.proasense.internal.SimpleEvent;
+import eu.proasense.internal.VariableType;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by shahzad on 18.08.15.
@@ -28,12 +37,12 @@ public class ProductionPlanServer {
         String productId = allValues[1];
 
         System.out.println(text);
-/*
+
         ComplexValue complexValue = new ComplexValue();
-        // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
+         Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
-        String sensorId = "materialchange"; //
+        sensorId = "materialchange"; //
         long timeStamp = System.currentTimeMillis(); //
 
         String machineId = allValues[0]; //
@@ -53,7 +62,7 @@ public class ProductionPlanServer {
         simpleEvent.putToEventProperties("materialId", complexValue);
 
 
-        this.outputPort.publishSimpleEvent(simpleEvent);*/
+       // this.outputPort.publishSimpleEvent(simpleEvent);
 
     }
 }

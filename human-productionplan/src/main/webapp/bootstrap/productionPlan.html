@@ -230,6 +230,7 @@
       alert(parents);
 
       var answers = [];
+      var values = [];
       var names = ["KM 1000/1 61282649/001",
         "KM 1000/2 61282634/001",
         "KM 1000/3 61282630/001",
@@ -241,14 +242,20 @@
         answers.push($(this).val());
       });
 
+      $.each($('.readable_value2'), function() {
+
+        values.push($(this).val());
+      });
+
+
       var n = 0;
       for(i = 0; i < 5; i++){
         var csv = "";
         for(k = 0; k < 16; k++) {
           csv+= answers[n++]+",";
         }
-
-        sendRequest(names[i]+","+csv);
+          sendRequest(values.toString());
+        //sendRequest(names[i]+","+csv);
       }
 
         document.getElementById("Production_plan_form").reset();
