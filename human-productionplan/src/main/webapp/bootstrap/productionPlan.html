@@ -26,7 +26,8 @@
 
 <form id="Production_plan_form">
   <h3 style="margin-left: 30px">Production plan form</h3>
-
+  <br>
+  <p style="margin-left: 30px">Date:<input id="datePicker" value="" type="text" style="width:80px"></p>
   <div class="well">
 
     <table class="table table-responsive">
@@ -50,6 +51,7 @@
           61282649/001</td>
 
         <td id="1-1">
+
           <div class="dropdown">
             <select class="readable_value">
               <option value="X82">X82</option>
@@ -60,11 +62,9 @@
               <option value="Delta 1">Delta 1</option>
               <option value="Default_value" selected>Select type</option>
             </select>
-            Time: <input type="time" class="readable_value" style="height: 20px; width: 80px;">
           </div>
 
-          <div class="dropdown" id="test">
-            <select id="select1" class="readable_value" onchange="selectedField(this);">
+            <select class="readable_value2" onchange="selectedField(this)" value="false">
               <option value="X82">X82</option>
               <option value="Delta 3">Delta 3</option>
               <option value="HFE">HFE</option>
@@ -73,8 +73,19 @@
               <option value="Delta 1">Delta 1</option>
               <option value="Default_value" selected>Select type</option>
             </select>
-            Time: <input id="field-two" type="time" class="readable_value" style="height: 20px; width: 80px; display: initial">
-          </div>
+
+          Time: <!-- <input id="field-two" readonly type="time" class="readable_value" style="height: 20px; width: 80px;"> -->
+
+          <select id = shiftTime class="time_value" value="test" onchange="validateField(this)">
+            <option class="0" value="07:00">07:00</option>
+            <option class="1" value="08:00">08:00</option>
+            <option class="2" value="09:00">09:00</option>
+            <option class="3" value=s"10:00">10:00</option>
+            <option class="4" value="11:00">11:00</option>
+            <option class="5" value="12:00">12:00</option>
+            <option class="6" value="13:00">13:00</option>
+            <option class='7' value="default_time" selected>Select time</option>
+          </select>
         </td>
 
         <td id="1-2"></td>
@@ -132,7 +143,7 @@
     <textarea rows="4" cols="175" placeholder="Write your comments here."></textarea>
 
     <br>
-    <input type="button" value="submit" id="submit" />
+    <input type="button" value="submit" id="submit"/>
   </div>
 </form>
 </body>
@@ -142,19 +153,68 @@
 
 
   var form = $("#1-1").html();
+  $("#1-1").empty();
 
-  for(i = 1; i <6; i++){
-    for(k = 1; k < 5; k++) {
-      $('#'+i+'-' + k).html(form);
+  var shift = $('#shiftTime').html();
+  $('#shiftTime').empty();
+
+  var workShift = [
+          ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "Select time"],
+          ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "Select time"],
+          ["23:00", "0:00", "01:00", "02:00", "03:00", "04:00", "05:00", "Select time"],
+          ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "Select time"],
+          ];
+
+  function validateField(check){
+    var myCheck = $(check).parent().attr('id');
+    var m = $('#'+myCheck+' .readable_value2').attr('value'); // har id og kan finne verdi
+
+    if(m ==='false'){
+
+      alert('Select type first!');
+      $(check).prop('selectedIndex', 7)
     }
   }
 
-  function selectedField(select_field){
-
+  function selectedField(selectField){
+    var sel = $(selectField).parent().attr('id'); // må finne id og gjøre value til true.
+    var val = $('#'+sel+' .readable_value2').attr('value', 'true');
+   // alert($(val).attr('value'));
   }
 
+  for(i = 1; i <6; i++){
+    for(k = 1; k < 5; k++) {
+      $('#'+i+'-' + k).append(form);
+    }
+  }
+
+  for(i = 1; i <6; i++){
+    for(k = 1; k < 5; k++) {
+      for (t = 0; t < 7; t++) {
+        $('#' + i + '-' + k + ' .time_value .'+t).text(workShift[k-1][t]);
+      }
+    }
+  }
 
   $(document).ready(function(){
+
+    var date = new Date();
+    var day = date.getDate()+1;
+    var month = date.getMonth();
+    var year = date.getYear();
+    $("#datePicker").val(day+"/"+month+"/"+year);
+
+    $('select.time_value').click(function(){
+      if($(this).parent().find('option').attr('readOnly')){
+        alert('Choose "Select type" first.');
+      }
+    });
+
+    $('select.readable_value').click(function(){
+      $('.readable_value').attr('value').val('true');
+      var verdi = document.getElementsByClassName('readable_value').val();
+      alert(verdi);
+    });
 
     function sendRequest(id, values){
       var request = new XMLHttpRequest();
@@ -166,8 +226,15 @@
 
     $('#submit').click(function () {
 
+      var parents = $(this).closest('input').attr('id');
+      alert(parents);
+
       var answers = [];
-      var names = ["KM 1000/1 61282649/001", "KM 1000/2 61282634/001", "KM 1000/3 61282630/001", "ENGEL 1700/4 61542722/001", "ENGEL 1700/5 61542721/001"];
+      var names = ["KM 1000/1 61282649/001",
+        "KM 1000/2 61282634/001",
+        "KM 1000/3 61282630/001",
+        "ENGEL 1700/4 61542722/001",
+        "ENGEL 1700/5 61542721/001"];
 
       $.each($('.readable_value'), function() {
 

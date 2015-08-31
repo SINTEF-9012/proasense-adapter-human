@@ -26,6 +26,8 @@ public class ProductionPlanServer {
         long timestamp = System.currentTimeMillis();
         int shiftid_value = 4;
         String productId = allValues[1];
+
+        System.out.println(text);
 /*
         ComplexValue complexValue = new ComplexValue();
         // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
