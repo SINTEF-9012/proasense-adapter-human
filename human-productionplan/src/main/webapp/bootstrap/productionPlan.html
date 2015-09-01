@@ -192,6 +192,7 @@
     for(k = 1; k < 5; k++) {
       for (t = 0; t < 7; t++) {
         $('#' + i + '-' + k + ' .time_value .'+t).text(workShift[k-1][t]);
+        $('#' + i + '-' + k + ' .time_value .'+t).val(workShift[k-1][t]);
       }
     }
   }
@@ -199,9 +200,9 @@
   $(document).ready(function(){
 
     var date = new Date();
-    var day = date.getDate()+1;
+    var day = date.getDate();
     var month = date.getMonth();
-    var year = date.getYear();
+    var year = date.getFullYear();
     $("#datePicker").val(day+"/"+month+"/"+year);
 
     $('select.time_value').click(function(){
@@ -252,18 +253,22 @@
       });
 
       var n = 0;
-      for(i = 0; i < 5; i++){
-        for(shift = 0; shift < 4; shift++){
+      for(i = 0; i < 5; i++) {
+        for (shift = 0; shift < 4; shift++) {
 
-          if(!(answers[n] === "Default_value")){
-        sendRequest(names[i]+","+(shift+1)+","+answers[n]+","+values[n]+","+time_value[n]);
+          if (!((answers[n] === "Default_value") && (values[n] === ""))) {
+            if (values[n] === "") {
+              sendRequest(names[i] + "," + (shift + 1) + "," + answers[n]);
+            } else {
+              sendRequest(names[i] + "," + (shift + 1) + "," + answers[n] + "," + values[n] + "," + time_value[n]);
+            }
           }
           n++;
-      }
+        }
       }
         document.getElementById("Production_plan_form").reset();
+      location.reload();
+      })
     })
-
-  })
 
 </script>
