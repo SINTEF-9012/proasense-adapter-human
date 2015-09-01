@@ -22,7 +22,7 @@ import java.util.Map;
  */
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/productionPlan")
-public class ProductionPlanServer extends AbstractBaseAdapter {
+public class ProductionPlanServer  extends AbstractBaseAdapter{
     // The Java method will process HTTP GET requests
 
     @POST
@@ -30,26 +30,26 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void convertToSimpleEvents(String text) {
 
-        System.out.println(text);
 
         String time_value[] = {"6:00", "14:00", "22:00", "6:00"};
         String allValues[] = text.split(",");
+
+        System.out.println("length1 er "+allValues.length);
 
         String machineId = allValues[0];
         long timestamp = System.currentTimeMillis();
         String shiftid = allValues[1];
         String productId = allValues[2];
-        String shiftStartTime = time_value[Integer.parseInt(shiftid)-1];
-        String shiftEndTime = time_value[Integer.parseInt(shiftid)];
+        String shiftStartTime = time_value[(Integer.parseInt(shiftid)-1)%3];
+        String shiftEndTime = time_value[Integer.parseInt(shiftid)%3];
+
         if (allValues.length == 3) {
-            //send start og slutt til en metode.
             makeAndPublishEvents(machineId, timestamp, shiftid, productId, shiftStartTime, shiftEndTime);
         } else if (allValues.length == 5) {
             shiftEndTime = allValues[4];
             makeAndPublishEvents(machineId, timestamp, shiftid, productId, shiftStartTime, shiftEndTime);
-            //send til metode med atsrt og end tiem.
             shiftStartTime = shiftEndTime;
-            shiftEndTime = time_value[Integer.parseInt(shiftid)];
+            shiftEndTime = time_value[(Integer.parseInt(shiftid))%3];
             productId = allValues[3];
             makeAndPublishEvents(machineId, timestamp, shiftid, productId, shiftStartTime, shiftEndTime);
         }
@@ -86,6 +86,5 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
 
             System.out.println(simpleEvent.toString());
         this.outputPort.publishSimpleEvent(simpleEvent);
-
     }
 }
