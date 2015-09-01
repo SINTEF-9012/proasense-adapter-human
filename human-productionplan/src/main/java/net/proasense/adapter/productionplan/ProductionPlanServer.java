@@ -29,16 +29,16 @@ public class ProductionPlanServer {
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void convertToSimpleEvents(String text){
 
-        String allValues[] = text.split(",");
+     /*   String allValues[] = text.split(",");
 
         String sensorId = allValues[0];
         long timestamp = System.currentTimeMillis();
         int shiftid_value = 4;
-        String productId = allValues[1];
+        String productId = allValues[1];*/
 
         System.out.println(text);
 
-        ComplexValue complexValue = new ComplexValue();
+/*        ComplexValue complexValue = new ComplexValue();
          Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
@@ -62,7 +62,7 @@ public class ProductionPlanServer {
         simpleEvent.putToEventProperties("materialId", complexValue);
 
 
-       // this.outputPort.publishSimpleEvent(simpleEvent);
+       this.outputPort.publishSimpleEvent(simpleEvent);*/
 
     }
 }
