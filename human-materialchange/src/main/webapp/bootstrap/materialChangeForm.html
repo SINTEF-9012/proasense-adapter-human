@@ -51,40 +51,40 @@
           <td style="background-color: red">KM 1000/1
             <br>
             61282649/001</td>
-          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button id = "1-1" type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button id = "1-2" type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr id="2" >
           <td style="background-color: orange">KM 1000/2
             <br>
             61282634/001</td>
-          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button id = "2-1" type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button id = "2-2" type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr id="3" >
           <td style="background-color: lightgreen">KM 1000/3
             <br>
             61282630/001</td>
-          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button id = "3-1" type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button id = "3-2" type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr id="4">
           <td style="background-color: lightskyblue">ENGEL 1700/4
             <br>
             61542722/001</td>
-          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button id = "4-1" type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button id = "4-2" type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
         <tr  id="5" class="flash">
           <td style="background-color: lightgray">ENGEL 1700/5
             <br>
             61542721/001</td>
-          <td align="center"><button type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
-          <td align="center"><button type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
+          <td align="center"><button id = "5-1" type="button" value="Makrolon" style="height:50px;width: 200px">Makrolon</button></td>
+          <td align="center"><button id = "5-2" type="button" value="Lexan" style="height:50px;width: 200px">Lexan</button></td>
         </tr>
 
 
@@ -110,7 +110,7 @@
 
       var request = new XMLHttpRequest();
 
-      request.open('POST', 'http://localhost:8080/adapter/changeForm', false);
+      request.open('POST', 'http://localhost:8081/adapter/changeForm', false);
 
       request.setRequestHeader("Content-Type", "application/json");
 
@@ -118,19 +118,27 @@
 
     }
 
-    var prevId = "";
     $('button').click(function(){
 
-      $(prevId).css('backgroundColor', '');
+      var parentId = $(this).closest("tr").attr('id');
+      var buttonId = $(this).attr('id');
 
-      $(this).css('backgroundColor', 'lightgreen');
+      var splitId = buttonId.split("-");
+
+      if((parentId+"-"+splitId[1]) === (parentId+"-1")){
+        $("#"+parentId+"-1").css('backgroundColor', 'lightgreen');
+        $("#"+parentId+"-2").css('backgroundColor', '');
+      }else{
+        $("#"+parentId+"-2").css('backgroundColor', 'lightgreen');
+        $("#"+parentId+"-1").css('backgroundColor', '');
+      }
+
 
       var id =  $(this).closest('tr').attr('id');
       var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
 
       var materialId = $(this).attr('value');
       sendRequest(machineNames[id-1]+","+materialId);
-      prevId = $(this);
     });
   });
 
