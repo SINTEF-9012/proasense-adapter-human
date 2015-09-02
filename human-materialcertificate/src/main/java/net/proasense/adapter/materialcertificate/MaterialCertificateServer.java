@@ -10,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.logging.Logger;
 
 /**
  * Created by shahzad on 15.08.15.
@@ -73,7 +74,7 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
         complexValue.setType(VariableType.DOUBLE);
         simpleEvent.putToEventProperties("mvrMax", complexValue);
 
-        System.out.println("DEBUG BEFORE " + simpleEvent.toString());
+
         this.outputPort.publishSimpleEvent(simpleEvent);
         System.out.println("DEBUG AFTER " + simpleEvent.toString());
 

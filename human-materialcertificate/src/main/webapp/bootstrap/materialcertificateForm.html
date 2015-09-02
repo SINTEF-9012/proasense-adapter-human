@@ -100,15 +100,9 @@
 
       var lables = ["Product type:", "Order number:", "Method field:", "Average:", "Min:", "Max:"];
 
-        document.writeln('Submitted values are:<br>');
-
-      for(n=0; n < lables.length; n++){
-        document.writeln(lables[n]+" "+answers[n]+"<br>");
-      }
-
       sendRequest(answers.toString());
 
-      alert('Refresh page?')
+      alert('All values are submitted.')
       $('#Human_form').reset();
 
     });

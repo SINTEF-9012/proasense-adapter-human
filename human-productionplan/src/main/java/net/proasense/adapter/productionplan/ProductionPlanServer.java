@@ -85,6 +85,6 @@ public class ProductionPlanServer  extends AbstractBaseAdapter{
 
 
         this.outputPort.publishSimpleEvent(simpleEvent);
-        System.out.println(simpleEvent.toString());
+
     }
 }
