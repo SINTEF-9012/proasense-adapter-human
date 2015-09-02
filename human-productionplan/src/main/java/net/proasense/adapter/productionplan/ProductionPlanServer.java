@@ -34,7 +34,6 @@ public class ProductionPlanServer  extends AbstractBaseAdapter{
         String time_value[] = {"6:00", "14:00", "22:00", "6:00"};
         String allValues[] = text.split(",");
 
-        System.out.println("length1 er "+allValues.length);
 
         String machineId = allValues[0];
         long timestamp = System.currentTimeMillis();

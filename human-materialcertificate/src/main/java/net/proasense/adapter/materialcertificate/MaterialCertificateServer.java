@@ -39,7 +39,7 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
         String mvrAverage = allValues[3]; //
         String mvrMin = allValues[4];
         String mvrMax = allValues[5];
-        String printOut = allValues[6];
+       // String printOut = allValues[6];
 
         simpleEvent.sensorId = sensorId;
         simpleEvent.timestamp = timeStamp;
@@ -74,6 +74,6 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
         simpleEvent.putToEventProperties("mvrMax", complexValue);
 
         this.outputPort.publishSimpleEvent(simpleEvent);
-
+        System.out.println(simpleEvent.toString());
     }
 }
