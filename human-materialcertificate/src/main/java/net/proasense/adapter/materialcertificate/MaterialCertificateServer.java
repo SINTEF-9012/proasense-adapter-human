@@ -73,7 +73,9 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
         complexValue.setType(VariableType.DOUBLE);
         simpleEvent.putToEventProperties("mvrMax", complexValue);
 
+        System.out.println("DEBUG BEFORE " + simpleEvent.toString());
         this.outputPort.publishSimpleEvent(simpleEvent);
+        System.out.println("DEBUG AFTER " + simpleEvent.toString());
 
     }
 }
