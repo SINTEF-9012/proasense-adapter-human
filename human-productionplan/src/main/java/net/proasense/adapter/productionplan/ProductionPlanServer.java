@@ -83,7 +83,8 @@ public class ProductionPlanServer  extends AbstractBaseAdapter{
         complexValue.setType(VariableType.LONG);
         simpleEvent.putToEventProperties("productEndTime", complexValue);
 
-            System.out.println(simpleEvent.toString());
+
         this.outputPort.publishSimpleEvent(simpleEvent);
+        System.out.println(simpleEvent.toString());
     }
 }

@@ -31,7 +31,7 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
        // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
-        String sensorId = "materialcertificate"; //
+        String sensorId = "materialcertificate"; // les denne fra propertiesfilen
         long timeStamp = System.currentTimeMillis(); //
         String orderNumber =allValues[1]; //
         String materialId = allValues[0]; //
@@ -39,7 +39,7 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
         String mvrAverage = allValues[3]; //
         String mvrMin = allValues[4];
         String mvrMax = allValues[5];
-        String printOut = allValues[6];
+     //   String printOut = allValues[6];
 
         simpleEvent.sensorId = sensorId;
         simpleEvent.timestamp = timeStamp;
