@@ -8,6 +8,8 @@ import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
 import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -24,11 +26,14 @@ import javax.ws.rs.core.Response;
 public class MaterialChangeServer extends AbstractBaseAdapter {
     // The Java method will process HTTP GET requests
 
+    protected String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+    final static Logger LOGGER = LoggerFactory.getLogger(MaterialChangeServer.class);
+
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response convertToSimpleEvents(String text){
-
+        LOGGER.debug("sensorID er "+sensorId);
         String allValues[] = text.split(",");
 
         //System.out.println("allValues[0] er "+allValues[0]+" allValues[1] er "+allValues[1]);
@@ -36,7 +41,6 @@ public class MaterialChangeServer extends AbstractBaseAdapter {
         // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
-        String sensorId = "materialchange"; //
         long timeStamp = System.currentTimeMillis(); //
 
         String machineId = allValues[0]; //

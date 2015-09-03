@@ -15,12 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 /**
  * Created by shahzad on 18.08.15.
  */
@@ -104,6 +99,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
 
         this.outputPort.publishSimpleEvent(simpleEvent);
         LOGGER.debug(simpleEvent.toString());
+        System.out.println(simpleEvent.toString());
     }
 
     long convertToLong(String date, String id) {

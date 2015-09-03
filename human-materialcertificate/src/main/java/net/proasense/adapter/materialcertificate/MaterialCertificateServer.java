@@ -4,6 +4,7 @@ import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
 import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -20,6 +21,9 @@ import java.util.logging.Logger;
 public class MaterialCertificateServer extends AbstractBaseAdapter {
     // The Java method will process HTTP GET requests
 
+    protected String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+    final static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(MaterialCertificateServer.class);
+
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -32,7 +36,7 @@ public class MaterialCertificateServer extends AbstractBaseAdapter {
        // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
-        String sensorId = "materialcertificate"; // les denne fra propertiesfilen
+        //String sensorId = "materialcertificate"; // les denne fra propertiesfilen
         long timeStamp = System.currentTimeMillis(); //
         String orderNumber =allValues[1]; //
         String materialId = allValues[0]; //
