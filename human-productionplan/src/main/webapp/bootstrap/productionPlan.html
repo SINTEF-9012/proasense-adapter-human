@@ -27,7 +27,7 @@
 <form id="Production_plan_form">
   <h3 style="margin-left: 30px">Production plan form</h3>
   <br>
-  <p style="margin-left: 30px">Date:<input id="datePicker" value="" type="text" style="width:80px"></p>
+  <p style="margin-left: 30px">Date:<input id="datePicker" value="" type="text" style="width:75px"></p>
   <div class="well">
 
     <table class="table table-responsive">
@@ -200,10 +200,13 @@
   $(document).ready(function(){
 
     var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth();
-    var year = date.getFullYear();
-    $("#datePicker").val(day+"/"+month+"/"+year);
+    var today = date.getTime();
+    var nextDay = new Date(today+86400000);
+    var nextDate = nextDay.getDate();
+    var month = nextDay.getMonth()+1;
+    var year = nextDay.getFullYear();
+    var formDate = $("#datePicker").val(nextDate+"/"+month+"/"+year);
+
 
     $('select.time_value').click(function(){
       if($(this).parent().find('option').attr('readOnly')){
@@ -258,13 +261,16 @@
 
           if (!((answers[n] === "Default_value") && (values[n] === ""))) {
             if (values[n] === "") {
-              sendRequest(names[i] + "," + (shift + 1) + "," + answers[n]);
+              sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n]);
+            } else if((answers[n] === "Default_value")){
+              sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + values[n] + "," + time_value[n]);
             } else {
-              sendRequest(names[i] + "," + (shift + 1) + "," + answers[n] + "," + values[n] + "," + time_value[n]);
+              sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n] + "," + values[n] + "," + time_value[n]);
             }
           }
           n++;
         }
+
       }
         document.getElementById("Production_plan_form").reset();
       location.reload();

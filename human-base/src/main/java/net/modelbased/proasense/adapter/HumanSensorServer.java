@@ -51,8 +51,6 @@ public class HumanSensorServer extends AbstractBaseAdapter {
 	@Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Response HumanSensorServer(String text){
 
-		System.out.println(text);
-
 //		String zooKeeper = "89.216.116.44:2181";
 //		String topic = "proasense.datainfrastructure.mhwirth.all";
 
