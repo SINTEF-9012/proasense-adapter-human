@@ -135,7 +135,8 @@
 
 
       var id =  $(this).closest('tr').attr('id');
-      var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
+     // var machineNames = ["KM 1000/1", "KM 1000/2", "KM 1000/3", "ENGEL 1700/4", "ENGEL 1700/5"];
+      var machineNames = ["6128649", "61282634", "61282630", "61542722", "61542721"];
 
       var materialId = $(this).attr('value');
       sendRequest(machineNames[id-1]+","+materialId);
