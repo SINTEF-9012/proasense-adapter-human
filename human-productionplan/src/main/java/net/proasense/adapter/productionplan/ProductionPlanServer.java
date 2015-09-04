@@ -40,7 +40,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         String allValues[] = text.split(",");
 
         String formDate = allValues[0];
-        String machineId = allValues[1];
+        String machineId = trimName(allValues[1]);
         long timestamp = System.currentTimeMillis();
         String shiftid = allValues[2];
         String productId = allValues[3];
@@ -55,7 +55,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         if (allValues.length == 4) {
             makeAndPublishEvents(machineId, timestamp, shiftid, productId, startMilliSec, endMilliSec);
         } else if (allValues.length == 5) {
-            LOGGER.debug("lengden er 5");
+           // LOGGER.debug("lengden er 5");
         } else if (allValues.length == 6) {
             shiftEndTime = allValues[5];
             long handoverTime = convertToLong(formDate+" "+shiftEndTime, shiftid);
@@ -75,9 +75,14 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
-        simpleEvent.setSensorId(machineId);
+        simpleEvent.setSensorId("machinePlan");
         simpleEvent.setTimestamp(timestamp);
 
+        complexValue.setValue(machineId);
+        complexValue.setType(VariableType.STRING);
+        simpleEvent.putToEventProperties("machineId", complexValue);
+
+        complexValue = new ComplexValue();
         complexValue.setValue(shiftid);
         complexValue.setType(VariableType.LONG);
         simpleEvent.putToEventProperties("shifId", complexValue);
@@ -130,5 +135,12 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
     public String addZero(String input) {
         if (input.length() == 1) return "0" + input;
         return input;
+    }
+
+    String trimName(String machineId){
+        String newID[];
+        newID = machineId.split(" ");
+        String newID2[] = newID[2].split("/");
+        return newID2[0];
     }
 }

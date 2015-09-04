@@ -241,17 +241,19 @@
         "ENGEL 1700/5 61542721/001"];
 
       $.each($('.readable_value'), function() {
-
         answers.push($(this).val());
       });
 
-      $.each($('.readable_value2'), function() {
+        if($.inArray("Default_value", answers) != -1){
+          alert("Please fill all `Select type` fields");
+          return;
+        }
 
+      $.each($('.readable_value2'), function() {
         values.push($(this).val());
       });
 
       $.each($('.time_value'), function() {
-
         time_value.push($(this).val());
       });
 
