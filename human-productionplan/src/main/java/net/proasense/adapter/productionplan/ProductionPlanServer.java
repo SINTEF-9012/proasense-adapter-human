@@ -29,12 +29,18 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
     // The Java method will process HTTP GET requests
 
     final static Logger LOGGER = LoggerFactory.getLogger(ProductionPlanServer.class);
+    HashMap<String,String> library = new HashMap<String,String>();
+    int flag = 0;
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void convertToSimpleEvents(String text) {
-        createLibrary();
+
+        if(flag == 0){
+            createLibrary();
+            flag = 1;
+        }
 
         LOGGER.debug(text);
         String time_value[] = {"6:00", "14:00", "22:00", "6:00"};
@@ -88,10 +94,22 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         complexValue.setType(VariableType.LONG);
         simpleEvent.putToEventProperties("shifId", complexValue);
 
+        String[] libraryRow = (library.get(productId)).split(",");
+
         complexValue = new ComplexValue();
-        complexValue.setValue(productId);
+        complexValue.setValue(libraryRow[0]);
         complexValue.setType(VariableType.STRING);
-        simpleEvent.putToEventProperties("productId", complexValue);
+        simpleEvent.putToEventProperties("mouldId", complexValue);
+
+        complexValue = new ComplexValue();
+        complexValue.setValue(libraryRow[1]);
+        complexValue.setType(VariableType.STRING);
+        simpleEvent.putToEventProperties("productId1", complexValue);
+
+        complexValue = new ComplexValue();
+        complexValue.setValue(libraryRow[2]);
+        complexValue.setType(VariableType.STRING);
+        simpleEvent.putToEventProperties("productId2", complexValue);
 
         complexValue = new ComplexValue();
         complexValue.setValue(Long.toString(prodStartTime));
@@ -105,7 +123,6 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
 
         this.outputPort.publishSimpleEvent(simpleEvent);
         LOGGER.debug(simpleEvent.toString());
-        System.out.println(simpleEvent.toString());
     }
 
     long convertToLong(String date, String id) {
@@ -145,23 +162,23 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         return newID2[0];
     }
 
-    HashMap createLibrary(){
+    void createLibrary(){
 
-               String libValues =  "KSP155.031-00U010	BMW - 155.031/032-00	155.031-00	155.032-00 ," +
-                "KSP156.013-00U010	Clio erna - 156.013/014-00	156.013-00	156.014-00 ," +
-                "KSP156.013-01U010	Clio temno siva - 156.013/014-01	156.013-01	156.014-01 ," +
-                "KSP156.013-02U010	Clio svetlo siva - 156.013/014-02	156.013-02	156.014-02 ," +
-                "KSP160.201-00U011	Astra 3300 (stara) 011 - 160.201/202-00	160.201-00	160.202-00 ," +
-                "KSP160.201-00U012	Astra 3300 (stara) 012 - 160.201/202-00	160.201-00	160.202-00 ," +
-                "KSP161.493-00U010	BMW - 161.493/494-00	161.493-00	161.494-00 ," +
-                "KSP162.979-00U010	Picasso PSA 010 - 162.979/980-00	162.979-00	162.980-00 ," +
-                "KSP162.979-00U011	Picasso PSA 011 - 162.979/980-00	162.979-00	162.980-00 ," +
-                "KSP166.071-01U010	Daimler CLK BR207 - 166.071-01/02	166.071-01	166.071-02 ," +
-                "KSP166.413-00U010	Daimler E-clase BR212 - 166.071-01/02	166.413-00	166.414-00 ," +
-                "KSP168.857-01U010	Insignia (stara) 010 - 168.857-01/02	168.857-01	168.857-02 ," +
-                "KSP168.857-01U011	Insignia (stara) 011 - 168.857-01/02	168.857-01	168.857-02 ," +
-                "KSP170.090-01U010	Pathfinder - 170.090-01/02	170.090-01	170.090-02 ," +
-                "KSP171.572-01U010	Delta (nova) - 010 171.572-01/02	171.572-01	171.572-02 ," +
+        String libValues =  "KSP155.031-00U010	BMW - 155.031/032-00	155.031-00	155.032-00 ," +
+                       "KSP156.013-00U010	Clio erna - 156.013/014-00	156.013-00	156.014-00 ," +
+                       "KSP156.013-01U010	Clio temno siva - 156.013/014-01	156.013-01	156.014-01 ," +
+                       "KSP156.013-02U010	Clio svetlo siva - 156.013/014-02	156.013-02	156.014-02 ," +
+                       "KSP160.201-00U011	Astra 3300 (stara) 011 - 160.201/202-00	160.201-00	160.202-00 ," +
+                       "KSP160.201-00U012	Astra 3300 (stara) 012 - 160.201/202-00	160.201-00	160.202-00 ," +
+                       "KSP161.493-00U010	BMW - 161.493/494-00	161.493-00	161.494-00 ," +
+                       "KSP162.979-00U010	Picasso PSA 010 - 162.979/980-00	162.979-00	162.980-00 ," +
+                       "KSP162.979-00U011	Picasso PSA 011 - 162.979/980-00	162.979-00	162.980-00 ," +
+                       "KSP166.071-01U010	Daimler CLK BR207 - 166.071-01/02	166.071-01	166.071-02 ," +
+                       "KSP166.413-00U010	Daimler E-clase BR212 - 166.071-01/02	166.413-00	166.414-00 ," +
+                       "KSP168.857-01U010	Insignia (stara) 010 - 168.857-01/02	168.857-01	168.857-02 ," +
+                       "KSP168.857-01U011	Insignia (stara) 011 - 168.857-01/02	168.857-01	168.857-02 ," +
+                       "KSP170.090-01U010	Pathfinder - 170.090-01/02	170.090-01	170.090-02 ," +
+                       "KSP171.572-01U010	Delta (nova) - 010 171.572-01/02	171.572-01	171.572-02 ," +
                        "KSP171.572-01U011	Delta (nova) - 011 171.572-01/02	171.572-01	171.572-02 ," +
                        "KSP171.572-01U012	Delta (nova) - 012 171.572-01/02	171.572-01	171.572-02 ," +
                        "KSP172.306-01U010	Insignia GMX 350 172.306-01/02	172.306-01	172.306-02 ," +
@@ -185,10 +202,9 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         String[] splitLib = libValues.split(",");
 
         for(int i = 0; i < splitLib.length; i++){
-            String[] splitValues = splitLib[i].split(" ");
-            System.out.println(splitValues.length);
+            String[] splitValues = splitLib[i].split("\\t");
+            library.put(splitValues[1], splitValues[0] + "," + splitValues[2] + ","+splitValues[3]);
+           // System.out.println(splitValues.length);
         }
-
-        return null;
     }
 }
