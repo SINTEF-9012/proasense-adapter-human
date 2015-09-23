@@ -12,9 +12,14 @@
 
     <artifactId>human-base</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.SINTEF-9012</groupId>
+            <artifactId>proasense-adapter-base</artifactId>
+            <version>93c7eff5846a25d258c49f38de0afea6e886fcb3</version>
+        </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
