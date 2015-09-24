@@ -18,8 +18,8 @@ import javax.ws.rs.core.MediaType;
  */
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/certificateForm")
-public class MaterialCertificateServer extends AbstractBaseAdapter {
-//public class MaterialCertificateServer extends AbstractHumanAdapterServer {
+//public class MaterialCertificateServer extends AbstractBaseAdapter {
+public class MaterialCertificateServer extends AbstractHumanAdapterServer {
     // The Java method will process HTTP GET requests
 
     protected String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
