@@ -31,7 +31,8 @@
 
     <div class="well" id="field-root">
 
-      Date and time for maintenance:<input type="text" required class="readable_value" style="margin-left: 20px; width:100px">
+      <strong>Date:</strong> <input type="text" required class="readable_value" style="margin-left: 32px; width:100px">
+      <strong>Time:</strong> <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
       <br> <br>
       Maintenance responsible person: <input type="text" required class="readable_value" style="margin-left: 5px; width:100px">
       <br>
@@ -42,24 +43,30 @@
       Product code: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
       <br><br>
       Top drive type: <input type="text" required class="readable_value" style="margin-left: 4px; width:100px">
-
-      <span style="margin-left:15px">Maintenance type performed:</span>
-      Small repair:<input type="radio", name="Small repair", value="Small repair" style="margin-left:5px">
-      Major repair:<input type="radio", name="Major repair", value="Major repair" style="margin-left:5px">
-
+      <br><br>
+      Maintenance type performed:
+      <select>
+        <option value="Small repair">Small <repair></repair></option>
+        <option value="Major repair">Major repair</option>
+      </select>
       <br><br>
       Number field: <input type="text" required class="readable_value" style="margin-left: 13px; width:100px">
-      <span style="margin-left:15px">Criticality of finding:</span>
-      Low:<input type="radio", name="Low", value="Low" style="margin-left:5px">
-      Medium:<input type="radio", name="Medium", value="Medium" style="margin-left:5px">
-      High:<input type="radio", name="High", value="High" style="margin-left:5px">
+      <br><br>
+      Criticality of finding:
+      <select>
+        <option Value="Default">Choose type</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option Value="High">High</option>
+      </select>
       <br><br>
 
       Cost field: <input type="text" required class="readable_value" style="margin-left: 33px; width:100px">
-      <span style="margin-left:15px">Equipment condition:</span>
-      Good:<input type="radio", name="Good", value="Good" style="margin-left:5px">
-      Medium:<input type="radio", name="medium", value="medium" style="margin-left:5px">
-      Poor:<input type="radio", name="Poor", value="Poor" style="margin-left:5px">
+      <br><br>
+      Equipment condition:
+      Good:<input type="checkbox", name="Good", value="Good" style="margin-left:5px">
+      Medium:<input type="checkbox", name="medium", value="medium" style="margin-left:5px">
+      Poor:<input type="checkbox", name="Poor", value="Poor" style="margin-left:5px">
       <br>
       <br>
 
