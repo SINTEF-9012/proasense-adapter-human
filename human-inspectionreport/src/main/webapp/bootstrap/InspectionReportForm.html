@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Inspection report</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <div class="container">
+    <h3>Inspection report form</h3>
+  </div>
+</head>
+<body>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+<form id="Human_form">
+  <div class="container">
+    <div class="well" id="field-root">
+
+      <strong>Date:</strong> <input type="text" required class="readable_value" style="margin-left: 32px; width:100px">
+      <strong>Time:</strong> <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      <br><br>
+      Inspection responsible person: <input type="text" required class="readable_value" style="margin-left: 30px; width:100px">
+      <br>
+      <br>
+
+      <strong>Equipment data:</strong>
+      <br>
+      Product code: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Top drive type: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      <br>
+      <br>
+
+      <strong>Inspection type:</strong>
+      <select>
+        <option value="Visual inspection">Visual inspection</option>
+        <option value="Vibrating monitoring">Rating swivel</option>
+        <option value="Oil sampling">Oil sampling</option>
+      </select>
+      <br>
+      <br>
+
+      <strong>Finding visual inspection:</strong>
+      <br>
+      Resulting criticality rating swival: <input type="radio" name="readable_value" style="margin-left: 14px"><br>
+      Resulting criticality rating gearbox: <input type="radio" required class="readable_value">
+      <br>
+      <br>
+
+      <strong>Finding vibrations:</strong>
+      <br>
+      Velocity swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Acceleration swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Velocity gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Acceleration gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      <br>
+      <br>
+
+      <strong>Finding oil sampling:</strong>
+      <br>
+      Fe content swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Viscosity swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Fe content gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Viscosity gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      <br>
+      <br>
+
+      <strong>Acceptance criteria:</strong>
+      <br>
+      Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
+      Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
+      Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
+      <br>
+      <br>
+
+
+    </div>
+    <button id="submit" type="submit">Submit</button>
+
+  </div>
+
+  </div>
+</form>
+
+</body>
+</html>
+
+<script>
+
+  // testChange
+  $(document).ready(function() {
+
+    function sendRequest(field_values){
+      var request = new XMLHttpRequest();
+      request.open('POST', 'http://localhost:8080/adapter/InspectionReportForm', false);
+      request.setRequestHeader("Content-Type", "application/json");
+      request.send(field_values);
+    }
+
+    $('#submit').click(function () {
+
+      var answers = [];
+      $.each($('.readable_value'), function() {
+        answers.push($(this).val());
+      });
+
+      sendRequest(answers.toString());
+
+      $('#Human_form').reset();
+
+    });
+
+  });
+
+</script>
+
