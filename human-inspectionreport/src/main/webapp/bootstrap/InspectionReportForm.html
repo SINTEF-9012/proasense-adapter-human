@@ -19,6 +19,11 @@
   <div class="container">
     <h3>Inspection report form</h3>
   </div>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+    }
+  </style>
 </head>
 <body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -29,9 +34,10 @@
 <form id="Human_form">
   <div class="container">
     <div class="well" id="field-root">
-
-      <strong>Date:</strong> <input type="text" required class="readable_value" style="margin-left: 32px; width:100px">
-      <strong>Time:</strong> <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Rig name: <input type="text" required class="readable_value" style="margin-left: 3px; width:100px">
+      <br><br>
+      <strong>Date:</strong> <input type="date" required class="readable_value" style="margin-left: 32px; width:130px">
+      <strong>Time:</strong> <input type="time" required class="readable_value" style="margin-left: 10px; width:70px">
       <br><br>
       Inspection responsible person: <input type="text" required class="readable_value" style="margin-left: 30px; width:100px">
       <br>
@@ -39,59 +45,151 @@
 
       <strong>Equipment data:</strong>
       <br>
-      Product code: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Top drive type: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      <br>
-      <br>
-
-      <strong>Inspection type:</strong>
-      <select>
-        <option value="Visual inspection">Visual inspection</option>
-        <option value="Vibrating monitoring">Rating swivel</option>
-        <option value="Oil sampling">Oil sampling</option>
+      Equipment type:
+      <select name="Equipment_daya" style="margin-left: 10px">
+        <option value="default">Choose type</option>
+        <option value="Top drive type">Top drive type</option>
+        <option value="RamRig">RamRig</option>
       </select>
       <br>
       <br>
 
-      <strong>Finding visual inspection:</strong>
-      <br>
-      Resulting criticality rating swival: <input type="checkbox" name="readable_value" style="margin-left: 14px"><br>
-      Resulting criticality rating gearbox: <input type="checkbox" required class="readable_value">
-      <br>
-      <br>
-
-      <strong>Finding vibrations:</strong>
-      <br>
-      Velocity swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Acceleration swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Velocity gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Acceleration gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      <strong>Inspection type:</strong>
+      <select id="dropList" name="Inspection_Type">
+        <option name="defaultname" id="default" value="default">Choose type</option>
+        <option id="Visual_inspection" value="Visual_inspection">Visual inspection</option>
+        <option id="Rating_swivel" value="Rating_swivel">Rating swivel</option>
+        <option id="Oil_sampling" value="Oil_sampling">Oil sampling</option>
+      </select>
       <br>
       <br>
 
-      <strong>Finding oil sampling:</strong>
-      <br>
-      Fe content swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Viscosity swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Fe content gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      Viscosity gearbox: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      <br>
-      <br>
+      <div id="Find_Visual_Inspection">
+        <table style="width:100%">
+      <tr>
+        <th><strong>Finding visual inspection:</strong></th>
+        <th> <strong>Acceptance criteria:</strong></th>
+      </tr>
 
-      <strong>Acceptance criteria:</strong>
-      <br>
-      Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
-      Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
-      Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
-      <br>
-      <br>
+      <tr>
+        <td>
+          Resulting criticality rating swival:
+          <select style="margin-left: 15px">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+          </select>
+        <td>
+          Visual inspection:<input type="text" step="any"class="readable_value" style="width:75px">
+          Finding vibration:<input type="text" step="any"class="readable_value" style="width:75px">
+          Finding oil sampling:<input type="text" step="any"class="readable_value" style="width:75px">
+        </td>
+        </td>
+        </tr>
+          <tr>
+            <td>
+              Resulting criticality rating gearbox:
+              <select>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+            <td>
+              Visual inspection:<input type="text" step="any"class="readable_value" style="width:75px">
+              Finding vibration:<input type="text" step="any"class="readable_value" style="width:75px">
+              Finding oil sampling:<input type="text" step="any"class="readable_value" style="width:75px">
+            </td>
+            </td>
+          </tr>
+        </table>
 
+      </div>
 
-    </div>
+      <div id="Finding_Vibrations">
+        <table style="width:100%">
+          <tr>
+            <th><strong>Finding vibration:</strong></th>
+            <th> <strong>Acceptance criteria:</strong></th>
+          </tr>
+      <tr>
+
+        <td>
+      Velocity swivel: <input type="text" required class="readable_value" style="margin-left: 39px; width:100px">
+          <td>
+        Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+        Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+        Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+      </td>
+      </tr>
+
+          <tr>
+        <td>Acceleration swivel: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px"></td>
+            <td>
+              Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+              Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+              Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+            </td>
+          </tr>
+
+        <tr>
+        <td>Velocity gearbox: <input type="text" required class="readable_value" style="margin-left: 25px; width:100px"></td>
+          <td>
+            Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+            Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+            Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:70px">
+          </td>
+        </tr>
+        </tr>
+        </table>
+      </div>
+
+      <div id="Finding_oil_sampling">
+        <table style="width: 100%">
+          <tr>
+      <th><strong>Finding oil sampling:</strong></th>
+      <th><strong>Acceptance criteria:</strong></th>
+          </tr>
+      <tr>
+      <td>Fe content swivel: <input type="text" required class="readable_value" style="margin-left: 19px; width:100px;"></td>
+          <td>
+          Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+          Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+          Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+          </td>
+      </tr>
+
+      <tr>
+      <td>Viscosity swivel: <input type="text" required class="readable_value" style="margin-left: 32px; width:100px"></td>
+        <td>
+          Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+          Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+          Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+        </td>
+      </tr>
+          <tr>
+          <td>Fe content gearbox: <input type="text" required class="readable_value" style="margin-left: 5px; width:100px"></td>
+            <td>
+              Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+              Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+              Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+            </td>
+          </tr>
+
+          <tr>
+        <td>Viscosity gearbox: <input type="text" required class="readable_value" style="margin-left: 17px; width:100px"></td>
+            <td>
+              Visual inspection:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+              Finding vibration:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+              Finding oil sampling:<input type="text" step="any"class="readable_value" style="margin-left: 10px; width:100px">
+            </td>
+          </tr>
+        </table>
+
+      <br>
     <button id="submit" type="submit">Submit</button>
-
+      </div>
   </div>
-
+  </div>
   </div>
 </form>
 
@@ -99,9 +197,25 @@
 </html>
 
 <script>
-
+  $('#Find_Visual_Inspection').hide();
+  $('#Finding_Vibrations').hide();
+  $('#Finding_oil_sampling').hide();
   // testChange
   $(document).ready(function() {
+
+    $('select[name="Inspection_Type"]').change(function(){
+      $('#Find_Visual_Inspection').hide();
+      $('#Finding_Vibrations').hide();
+      $('#Finding_oil_sampling').hide();
+        var input = $(this).val();
+        if(input === "Visual_inspection"){
+          $('#Find_Visual_Inspection').show();
+        }else if(input === "Rating_swivel"){
+          $('#Finding_Vibrations').show();
+        }else if(input === "Oil_sampling"){
+          $('#Finding_oil_sampling').show();
+        }
+    });
 
     function sendRequest(field_values){
       var request = new XMLHttpRequest();
