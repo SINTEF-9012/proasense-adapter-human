@@ -30,30 +30,40 @@
   <div class="container">
 
     <div class="well" id="field-root">
-
-      <strong>Date:</strong> <input type="text" required class="readable_value" style="margin-left: 32px; width:100px">
-      <strong>Time:</strong> <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      <strong>Rig name</strong> <input type="text" required class="readable_value" style="margin-left: 5px; width:100px">
+      <br><br>
+      <strong>Date:</strong> <input type="date" required class="readable_value" style="margin-left: 32px; width:150px">
+      <strong>Time:</strong> <input type="time" required class="readable_value" style="margin-left: 10px; width:75px">
       <br> <br>
-      Maintenance responsible person: <input type="text" required class="readable_value" style="margin-left: 5px; width:100px">
+      Maintenance responsible person: <input type="text" required class="readable_value" style="margin-left: 5px; width:135px">
       <br>
       <br>
 
       <strong>Equipment data:</strong>
       <br>
-      Product code: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
+      Equipment type:
+      <select>
+      <option>Choose type</option>
+      <option>Top drive</option>
+      <option>RamRig</option>
+      </select>
       <br><br>
-      Top drive type: <input type="text" required class="readable_value" style="margin-left: 4px; width:100px">
+      Product code: <input type="text" required class="readable_value" style="margin-left: 16px; width:100px">
+      <br><br>
+      Top drive type: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
       <br><br>
       Maintenance type performed:
       <select>
+        <option value="Small repair">Repair type <repair></repair></option>
         <option value="Small repair">Small <repair></repair></option>
         <option value="Major repair">Major repair</option>
       </select>
       <br><br>
-      Number field: <input type="text" required class="readable_value" style="margin-left: 13px; width:100px">
+
+      Time usage: <input type="number" required class="readable_value" style="margin-left: 25px; width:100px">  (Hours)
       <br><br>
-      Criticality of finding:
-      <select>
+      Critical value:
+      <select style="margin-left: 20px;">
         <option Value="Default">Choose type</option>
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
@@ -61,19 +71,22 @@
       </select>
       <br><br>
 
-      Cost field: <input type="text" required class="readable_value" style="margin-left: 33px; width:100px">
+      Sustainment cost: <input type="number" required class="readable_value" style="margin-left: 0px; width:100px"> $
       <br><br>
       Equipment condition:
-      Good:<input type="checkbox", name="Good", value="Good" style="margin-left:5px">
-      Medium:<input type="checkbox", name="medium", value="medium" style="margin-left:5px">
-      Poor:<input type="checkbox", name="Poor", value="Poor" style="margin-left:5px">
+      <select id="acceptance_criteria" style="margin-left: 20px;">
+        <option Value="default">Choose condition</option>
+        <option Value="Good">Good</option>
+        <option value="Medium">Medium</option>
+        <option value="Poor">Poor</option>
+      </select>
       <br>
       <br>
 
 
       <strong>Acceptance criteria:</strong>
       <br>
-      Maintenance:<input type="text" step="any"class="readable_value" style="margin-left: 10px;">
+      Maintenance criteria accepted:<input id="acceptance_field" type="text" step="any"class="readable_value" style="margin-left: 0px; width: 100px">
       <br>
       <br>
       </div>
@@ -90,7 +103,22 @@
 <script>
 
   // testChange
+  $("#acceptance_field").css({'backgroundColor':'lightgrey'});
+  $("#acceptance_field").val("NA");
   $(document).ready(function() {
+
+    $("#acceptance_criteria").on('change', function(){
+          var val = $("#acceptance_criteria :selected").text();
+
+      if(val === "Good" || val === "Medium"){
+        $("#acceptance_field").css({'backgroundColor':'lightgreen'});
+        $("#acceptance_field").val("True");
+      }else if(val === "Poor"){
+        $("#acceptance_field").css({'backgroundColor':'red'});
+        $("#acceptance_field").val("False");
+      }
+    });
+
 
     function sendRequest(field_values){
       var request = new XMLHttpRequest();
