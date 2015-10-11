@@ -103,11 +103,8 @@ public class InspectionReport extends AbstractBaseAdapter {
     }
 
     public SimpleEvent oilSampling(SimpleEvent simpleEvent, String[] mapping){
-        System.out.println("er i Oil sampling");
+        logger.debug("in oilSampling method");
 
-        for(int i = 0; i < mapping.length; i++){
-            System.out.println(mapping[i]);
-        }
         simpleEvent = createEvent(simpleEvent, "swivelOilSamplingFeContent", mapping[0], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "swivelOilSamplingViscosity", mapping[1], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingFeContent", mapping[2], VariableType.DOUBLE);
@@ -166,9 +163,8 @@ public class InspectionReport extends AbstractBaseAdapter {
     }
 
     public void publishEvent(SimpleEvent simpleEvent){
-        System.out.println(simpleEvent.toString());
         outputPort.publishSimpleEvent(simpleEvent);
-        System.out.println("finished");
+        logger.debug(simpleEvent.toString());
     }
 
     public SimpleEvent createEvent(SimpleEvent simpleEvent, String eventName,
