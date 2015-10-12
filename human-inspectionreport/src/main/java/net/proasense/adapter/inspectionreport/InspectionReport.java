@@ -82,9 +82,9 @@ public class InspectionReport extends AbstractBaseAdapter {
         String[] visualInspectionValues = visualInspectionVal.split(",");
 
         simpleEvent = createEvent(simpleEvent, "swivelCriticalityRating", visualInspectionValues[0], VariableType.LONG);
-        simpleEvent = createEvent(simpleEvent, "swivelCriticalityRatingAcceptance", visualInspectionValues[1], VariableType.STRING);
+        simpleEvent = createEvent(simpleEvent, "swivelCriticalityRatingAcceptance", visualInspectionValues[1], VariableType.BOOLEAN);
         simpleEvent = createEvent(simpleEvent, "gearboxCriticalityRating", visualInspectionValues[2], VariableType.LONG);
-        simpleEvent = createEvent(simpleEvent, "gearboxCriticalityRatingAcceptance", visualInspectionValues[3], VariableType.STRING);
+        simpleEvent = createEvent(simpleEvent, "gearboxCriticalityRatingAcceptance", visualInspectionValues[3], VariableType.BOOLEAN);
         return simpleEvent;
     }
 
@@ -94,10 +94,10 @@ public class InspectionReport extends AbstractBaseAdapter {
         simpleEvent = createEvent(simpleEvent, "swivelVibrationAcceleration", mapping[1], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "gearboxVibrationVelocity", mapping[2], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "gearboxVibrationAcceleration", mapping[3], VariableType.DOUBLE);
-        simpleEvent = createEvent(simpleEvent, "swivelVibrationVelocityAcceptance", mapping[4], VariableType.STRING);
-        simpleEvent = createEvent(simpleEvent, "swivelVibrationAccelerationAcceptance", mapping[5], VariableType.STRING);
-        simpleEvent = createEvent(simpleEvent, "gearboxVibrationVelocityAcceptance", mapping[6], VariableType.STRING);
-        simpleEvent = createEvent(simpleEvent, "gearboxVibrationAccelerationAcceptance", mapping[7], VariableType.STRING);
+        simpleEvent = createEvent(simpleEvent, "swivelVibrationVelocityAcceptance", mapping[4], VariableType.BOOLEAN);
+        simpleEvent = createEvent(simpleEvent, "swivelVibrationAccelerationAcceptance", mapping[5], VariableType.BOOLEAN);
+        simpleEvent = createEvent(simpleEvent, "gearboxVibrationVelocityAcceptance", mapping[6], VariableType.BOOLEAN);
+        simpleEvent = createEvent(simpleEvent, "gearboxVibrationAccelerationAcceptance", mapping[7], VariableType.BOOLEAN);
 
     return simpleEvent;
     }
@@ -109,10 +109,10 @@ public class InspectionReport extends AbstractBaseAdapter {
         simpleEvent = createEvent(simpleEvent, "swivelOilSamplingViscosity", mapping[1], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingFeContent", mapping[2], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingViscocity", mapping[3], VariableType.DOUBLE);
-        simpleEvent = createEvent(simpleEvent, "swivelOilSamplingFeContentAcceptance", mapping[4], VariableType.STRING);
-        simpleEvent = createEvent(simpleEvent, "swivelOilSamplingViscosityAcceptance", mapping[5], VariableType.STRING);
-        simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingFeContentAcceptance", mapping[6], VariableType.STRING);
-        simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingViscocityAcceptance", mapping[7], VariableType.STRING);
+        simpleEvent = createEvent(simpleEvent, "swivelOilSamplingFeContentAcceptance", mapping[4], VariableType.BOOLEAN);
+        simpleEvent = createEvent(simpleEvent, "swivelOilSamplingViscosityAcceptance", mapping[5], VariableType.BOOLEAN);
+        simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingFeContentAcceptance", mapping[6], VariableType.BOOLEAN);
+        simpleEvent = createEvent(simpleEvent, "gearboxOilSamplingViscocityAcceptance", mapping[7], VariableType.BOOLEAN);
 
         return simpleEvent;
     }
