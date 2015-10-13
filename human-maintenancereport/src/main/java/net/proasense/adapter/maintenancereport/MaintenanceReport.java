@@ -35,7 +35,7 @@ public class MaintenanceReport extends AbstractBaseAdapter{
         String date = seperateValues[1];
         String time = seperateValues[2];
         String dateAndTime = date+" "+time;
-        DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+        DateFormat formatter = new SimpleDateFormat("dd-mm-yyyy HH:mm");
 
         Date parsedDate = formatter.parse(dateAndTime);
         long longTime = parsedDate.getTime();

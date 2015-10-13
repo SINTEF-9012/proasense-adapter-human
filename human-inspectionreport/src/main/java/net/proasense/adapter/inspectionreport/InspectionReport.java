@@ -125,7 +125,7 @@ public class InspectionReport extends AbstractBaseAdapter {
 
         //convert date and time to long.
         String dateTime = basicInfo[1]+" "+basicInfo[2];
-        DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm");
+        DateFormat formatter = new SimpleDateFormat("dd-mm-yyyy HH:mm");
         Date parsedDate = formatter.parse(dateTime);
         long longTime = parsedDate.getTime();
 

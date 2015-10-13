@@ -28,12 +28,13 @@
 <script src="js/bootstrap.min.js"></script>
 
   <div class="container">
+    <form id="Human_form">
 
     <div class="well" id="field-root">
       <strong>Rig name</strong> <input type="text" required class="readable_value" style="margin-left: 5px; width:100px">
       <br><br>
-      <strong>Date:</strong> <input type="date" required class="readable_value" style="margin-left: 32px; width:150px">
-      <strong>Time:</strong> <input type="time" required class="readable_value" style="margin-left: 10px; width:75px">
+      <strong>Date:</strong> <input type="text" id="date" required class="readable_value" style="margin-left: 32px; width:75px">
+      <strong>Time:</strong> <input type="text" id="time" required class="readable_value" style="margin-left: 10px; width:45px">
       <br> <br>
       Maintenance responsible person: <input type="text" required class="readable_value" style="margin-left: 5px; width:135px">
       <br>
@@ -42,7 +43,7 @@
       <strong>Equipment data:</strong>
       <br>
       Equipment type:
-      <select>
+      <select class="readable_value">
       <option>Choose type</option>
       <option>Top drive</option>
       <option>RamRig</option>
@@ -50,12 +51,11 @@
       <br><br>
       Product code: <input type="text" required class="readable_value" style="margin-left: 16px; width:100px">
       <br><br>
-      Top drive type: <input type="text" required class="readable_value" style="margin-left: 10px; width:100px">
-      <br><br>
+
       Maintenance type performed:
-      <select>
+      <select class="readable_value">
         <option value="Small repair">Repair type <repair></repair></option>
-        <option value="Small repair">Small <repair></repair></option>
+        <option value="Small repair">Small repair<repair></repair></option>
         <option value="Major repair">Major repair</option>
       </select>
       <br><br>
@@ -63,18 +63,18 @@
       Time usage: <input type="number" required class="readable_value" style="margin-left: 25px; width:100px">  (Hours)
       <br><br>
       Critical value:
-      <select style="margin-left: 20px;">
+      <select class = "readable_value" style="margin-left: 20px;">
         <option Value="Default">Choose type</option>
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option Value="High">High</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option Value="3">3</option>
       </select>
       <br><br>
 
       Sustainment cost: <input type="number" required class="readable_value" style="margin-left: 0px; width:100px"> $
       <br><br>
       Equipment condition:
-      <select id="acceptance_criteria" style="margin-left: 20px;">
+      <select class="readable_value" id="acceptance_criteria" style="margin-left: 20px;">
         <option Value="default">Choose condition</option>
         <option Value="Good">Good</option>
         <option value="Medium">Medium</option>
@@ -91,11 +91,8 @@
       <br>
       </div>
     <button id="submit" type="submit">Submit</button>
-
+    </form>
   </div>
-  </div>
-  </div>
-</span>
 
 </body>
 </html>
@@ -105,6 +102,21 @@
   // testChange
   $("#acceptance_field").css({'backgroundColor':'lightgrey'});
   $("#acceptance_field").val("NA");
+
+  // date
+  var date = new Date();
+  var days = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
+  var fullDate = days+"-"+month+"-"+year;
+  $("#date").val(fullDate);
+
+  // time
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var localTime = hours+":"+minutes
+  $("#time").val(localTime);
+
   $(document).ready(function() {
 
     $("#acceptance_criteria").on('change', function(){
@@ -136,8 +148,12 @@
 
       sendRequest(answers.toString());
 
-      $('#Human_form').reset();
+      $('#Human_form')[0].reset();
+      $("#acceptance_field").css({'backgroundColor':'lightgrey'});
+      $("#acceptance_field").val("NA");
 
+      $("#date").val(fullDate);
+      $("#time").val(localTime);
     });
 
   });
