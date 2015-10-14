@@ -25,9 +25,9 @@ Human sensor adapter for the Sensing Architecture developed in the ProaSense pro
 ## User guide
 * The server must have been started after the steps above, for every module there is an url. Different modules have different
   url, these url are described below parallel to their modules.
- 1. human-inspectionreport    : http://localhost:8080/InspectionReportForm.html
- 2. human-maintenancereport   : http://localhost:8080/MaintenanceReport.html
- 3. human-materialcertificate : http://localhost:8080/materialCertificateForm.html
- 4. human-materialchange      : http://localhost:8080/materialChangeForm.html
- 5. human-productionplan      : http://localhost:8080/productionPlanForm.html
+ 1. human-inspectionreport    : http://(server address)/InspectionReportForm.html
+ 2. human-maintenancereport   : http://(server address)/MaintenanceReport.html
+ 3. human-materialcertificate : http://(server address)/materialCertificateForm.html
+ 4. human-materialchange      : http://(server address)/materialChangeForm.html
+ 5. human-productionplan      : http://(server address)/productionPlanForm.html
 * By visiting the url, different forms will appear in the browser, depending on the module being used. Fill the form of your  choice and click submit. 
