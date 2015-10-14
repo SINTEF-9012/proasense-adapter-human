@@ -7,7 +7,7 @@ Human sensor adapter for the Sensing Architecture developed in the ProaSense pro
 * Internet browser.
 
 ## Modules
- * There are six modules in proasense-adapter-human folder, five of them are will be used as application, being.
+ * There are six modules in proasense-adapter-human folder, five of them will be used as application, being:
  1. human-inspectionreport
  2. human-maintenancereport
  3. human-materialcertificate
@@ -23,10 +23,11 @@ Human sensor adapter for the Sensing Architecture developed in the ProaSense pro
 * mvn tomcat7:run-war
 
 ## User guide
-* the server must have been started after the steps above, for every module there is an url. Different modules have different
+* The server must have been started after the steps above, for every module there is an url. Different modules have different
   url, these url are described below parallel to their modules.
  1. human-inspectionreport    : http://localhost:8080/InspectionReportForm.html
  2. human-maintenancereport   : http://localhost:8080/MaintenanceReport.html
  3. human-materialcertificate : http://localhost:8080/materialCertificateForm.html
  4. human-materialchange      : http://localhost:8080/materialChangeForm.html
  5. human-productionplan      : http://localhost:8080/productionPlanForm.html
+* By visiting the url, different forms will appear in the browser, depending on the module being used. Fill the form of your  choice and click submit. 
