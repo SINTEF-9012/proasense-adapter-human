@@ -374,7 +374,6 @@
     });
 
     function sendRequest(field_values){
-      alert(field_values);
       var request = new XMLHttpRequest();
       request.open('POST', 'http://localhost:8080/adapter/InspectionReportForm', false);
       request.setRequestHeader("Content-Type", "application/json");

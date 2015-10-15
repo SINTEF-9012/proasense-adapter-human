@@ -88,7 +88,7 @@
     function sendRequest(field_values){
       var request = new XMLHttpRequest();
 
-      request.open('POST', 'http://localhost:8080/human-materialcertificate/adapter/certificateForm', false);
+      request.open('POST', 'http://localhost:8080/adapter/certificateForm', false);
       request.setRequestHeader("Content-Type", "application/json");
       request.send(field_values);
     }

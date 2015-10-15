@@ -59,8 +59,8 @@ public class MaterialChangeServer extends AbstractBaseAdapter {
         complexValue.setType(VariableType.STRING);
         simpleEvent.putToEventProperties("materialId", complexValue);
 
+        System.out.println(simpleEvent.toString());
         this.outputPort.publishSimpleEvent(simpleEvent);
-            System.out.println(simpleEvent.toString());
         return Response.status(201).entity(text).build();
     }
 }

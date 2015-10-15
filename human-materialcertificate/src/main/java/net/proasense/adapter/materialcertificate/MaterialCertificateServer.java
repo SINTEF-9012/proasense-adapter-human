@@ -30,7 +30,6 @@ public class MaterialCertificateServer extends AbstractHumanAdapterServer {
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void convertToSimpleEvents(String text){
 
-        System.out.println(text);
         String allValues[] = text.split(",");
 
         ComplexValue complexValue = new ComplexValue();
@@ -79,9 +78,6 @@ public class MaterialCertificateServer extends AbstractHumanAdapterServer {
         complexValue.setType(VariableType.DOUBLE);
         simpleEvent.putToEventProperties("mvrMax", complexValue);
 
-
         this.outputPort.publishSimpleEvent(simpleEvent);
-        System.out.println("DEBUG AFTER " + simpleEvent.toString());
-
     }
 }
