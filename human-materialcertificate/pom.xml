@@ -13,6 +13,8 @@
     <artifactId>human-materialcertificate</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <name>human-materialcertificate</name>
+    <url>https://github.com/SINTEF-9012/proasense-adapter-human/tree/master/human-materialcertificate</url>
 
     <dependencies>
         <dependency>
@@ -37,6 +39,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-
 </project>

@@ -13,6 +13,8 @@
     <artifactId>human-productionplan</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+    <name>human-productionplan</name>
+    <url>https://github.com/SINTEF-9012/proasense-adapter-human/tree/master/human-productionplan</url>
 
     <dependencies>
         <dependency>
@@ -42,5 +44,4 @@
             <version>1.2.17</version>
         </dependency>
     </dependencies>
-
 </project>

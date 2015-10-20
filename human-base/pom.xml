@@ -13,6 +13,8 @@
     <artifactId>human-base</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>human-base</name>
+    <url>https://github.com/SINTEF-9012/proasense-adapter-human/tree/master/human-base</url>
 
     <dependencies>
         <dependency>
@@ -47,5 +49,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
