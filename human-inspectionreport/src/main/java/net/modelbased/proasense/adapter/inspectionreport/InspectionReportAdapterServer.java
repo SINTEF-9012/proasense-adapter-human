@@ -1,31 +1,46 @@
-package net.proasense.adapter.inspectionreport;
-
+/**
+ * Copyright (C) 2014-2015 SINTEF
+ *
+ *     Brian Elvesæter <brian.elvesater@sintef.no>
+ *     Shahzad Karamat <shazad.karamat@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package net.modelbased.proasense.adapter.inspectionreport;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+
+import net.modelbased.proasense.adapter.AbstractHumanAdapterServer;
+
 import org.apache.log4j.Logger;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-/**
- * Created by Shahzad on 01.10.2015.
- */
 
-@Path("/InspectionReportForm")
-public class InspectionReport extends AbstractBaseAdapter {
-
-    Logger logger = Logger.getLogger("net.proasense.adapter.inspectionreport.InspectionReport");
+@Path("/InspectionReportAdapterServer")
+public class InspectionReportAdapterServer extends AbstractHumanAdapterServer {
+    Logger logger = Logger.getLogger("net.modelbased.proasense.adapter.inspectionreport.InspectionReport");
     String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
 
     @POST
@@ -77,6 +92,7 @@ public class InspectionReport extends AbstractBaseAdapter {
         publishEvent(simpleEvent);
     }
 
+
     public SimpleEvent visualInspection(SimpleEvent simpleEvent, String visualInspectionVal){
         logger.debug("traversing visualInspection method");
         String[] visualInspectionValues = visualInspectionVal.split(",");
@@ -87,6 +103,7 @@ public class InspectionReport extends AbstractBaseAdapter {
         simpleEvent = createEvent(simpleEvent, "gearboxCriticalityRatingAcceptance", visualInspectionValues[3], VariableType.BOOLEAN);
         return simpleEvent;
     }
+
 
     public SimpleEvent vibrationMonitoring(SimpleEvent simpleEvent, String[] mapping){
         logger.debug("trversing vibrationMonitoring method");
@@ -102,6 +119,7 @@ public class InspectionReport extends AbstractBaseAdapter {
     return simpleEvent;
     }
 
+
     public SimpleEvent oilSampling(SimpleEvent simpleEvent, String[] mapping){
         logger.debug("in oilSampling method");
 
@@ -116,6 +134,7 @@ public class InspectionReport extends AbstractBaseAdapter {
 
         return simpleEvent;
     }
+
 
     public SimpleEvent makeLevelOneEvent(String[] basicInfo) throws ParseException {
         SimpleEvent simpleEvent = new SimpleEvent();
@@ -162,14 +181,14 @@ public class InspectionReport extends AbstractBaseAdapter {
         return simpleEvent;
     }
 
+
     public void publishEvent(SimpleEvent simpleEvent){
         outputPort.publishSimpleEvent(simpleEvent);
         logger.debug(simpleEvent.toString());
     }
 
-    public SimpleEvent createEvent(SimpleEvent simpleEvent, String eventName,
-                            String value, VariableType variableType){
 
+    public SimpleEvent createEvent(SimpleEvent simpleEvent, String eventName, String value, VariableType variableType){
         ComplexValue complexValue = new ComplexValue();
         complexValue.setType(variableType);
         complexValue.setValue(value);
