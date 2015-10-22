@@ -1,9 +1,28 @@
-package net.proasense.adapter.maintenancereport;
+/**
+ * Copyright (C) 2014-2015 SINTEF
+ *
+ *     Brian Elvesæter <brian.elvesater@sintef.no>
+ *     Shahzad Karamat <shazad.karamat@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package net.modelbased.proasense.adapter.maintenancereport;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
 import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+import net.modelbased.proasense.adapter.human.AbstractHumanAdapter;
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.Consumes;
@@ -16,19 +35,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Shahzad on 01.10.2015.
- */
-@Path("/MaintenanceReport")
-public class MaintenanceReport extends AbstractBaseAdapter{
-    Logger logger = Logger.getLogger("net.proasense.adapter.maintenancereport.MaintenanceReport");
+@Path("/MaintenanceReportAdapter")
+public class MaintenanceReportAdapter extends AbstractHumanAdapter {
+    Logger logger = Logger.getLogger("net.modelbased.proasense.adapter.maintenancereport.MaintenanceReport");
     String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void convertToSimpleEvents(String text) throws ParseException {
-
         String[] seperateValues = text.split(",");
 
         String rigName = seperateValues[0];
@@ -106,6 +121,5 @@ public class MaintenanceReport extends AbstractBaseAdapter{
         simpleEvent.putToEventProperties("equipmentConditionAcceptance", complexValue);
 
         logger.debug(simpleEvent.toString());
-
     }
 }
