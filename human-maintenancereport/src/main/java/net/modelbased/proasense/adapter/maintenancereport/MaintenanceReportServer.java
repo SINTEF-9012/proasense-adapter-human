@@ -36,8 +36,10 @@ import java.util.Date;
 
 @Path("/MaintenanceReportServer")
 public class MaintenanceReportServer extends AbstractHumanServer {
-    Logger logger = Logger.getLogger("net.modelbased.proasense.adapter.maintenancereport.MaintenanceReport");
+    Logger logger = Logger.getLogger(MaintenanceReportServer.class);
+
     String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
