@@ -3,8 +3,7 @@ package net.proasense.adapter.materialcertificate;
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-import net.modelbased.proasense.adapter.AbstractHumanAdapterServer;
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+import net.modelbased.proasense.adapter.human.AbstractHumanAdapter;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
@@ -19,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 // The Java class will be hosted at the URI path "/helloworld"
 @Path("/certificateForm")
 //public class MaterialCertificateServer extends AbstractBaseAdapter {
-public class MaterialCertificateServer extends AbstractHumanAdapterServer {
+public class MaterialCertificateServer extends AbstractHumanAdapter {
     // The Java method will process HTTP GET requests
 
     protected String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");

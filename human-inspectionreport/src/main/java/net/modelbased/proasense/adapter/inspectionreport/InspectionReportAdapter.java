@@ -22,7 +22,7 @@ import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
 
-import net.modelbased.proasense.adapter.AbstractHumanAdapterServer;
+import net.modelbased.proasense.adapter.human.AbstractHumanAdapter;
 
 import org.apache.log4j.Logger;
 
@@ -38,8 +38,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/InspectionReportAdapterServer")
-public class InspectionReportAdapterServer extends AbstractHumanAdapterServer {
+@Path("/InspectionReportAdapter")
+public class InspectionReportAdapter extends AbstractHumanAdapter {
     Logger logger = Logger.getLogger("net.modelbased.proasense.adapter.inspectionreport.InspectionReport");
     String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
 
@@ -107,6 +107,7 @@ public class InspectionReportAdapterServer extends AbstractHumanAdapterServer {
 
     public SimpleEvent vibrationMonitoring(SimpleEvent simpleEvent, String[] mapping){
         logger.debug("trversing vibrationMonitoring method");
+
         simpleEvent = createEvent(simpleEvent, "swivelVibrationVelocity", mapping[0], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "swivelVibrationAcceleration", mapping[1], VariableType.DOUBLE);
         simpleEvent = createEvent(simpleEvent, "gearboxVibrationVelocity", mapping[2], VariableType.DOUBLE);
@@ -116,7 +117,7 @@ public class InspectionReportAdapterServer extends AbstractHumanAdapterServer {
         simpleEvent = createEvent(simpleEvent, "gearboxVibrationVelocityAcceptance", mapping[6], VariableType.BOOLEAN);
         simpleEvent = createEvent(simpleEvent, "gearboxVibrationAccelerationAcceptance", mapping[7], VariableType.BOOLEAN);
 
-    return simpleEvent;
+        return simpleEvent;
     }
 
 

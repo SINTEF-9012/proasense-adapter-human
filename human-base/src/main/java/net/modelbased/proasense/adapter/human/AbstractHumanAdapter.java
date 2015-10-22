@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.modelbased.proasense.adapter;
+package net.modelbased.proasense.adapter.human;
 
 import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
 
@@ -27,9 +27,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-public abstract class AbstractHumanAdapterServer extends AbstractBaseAdapter {
+public abstract class AbstractHumanAdapter extends AbstractBaseAdapter {
 
-	public AbstractHumanAdapterServer(){
+	public AbstractHumanAdapter(){
 	}
 
 
