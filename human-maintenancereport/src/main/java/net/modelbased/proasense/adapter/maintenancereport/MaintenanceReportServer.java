@@ -21,8 +21,7 @@ package net.modelbased.proasense.adapter.maintenancereport;
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
-import net.modelbased.proasense.adapter.human.AbstractHumanAdapter;
+import net.modelbased.proasense.adapter.human.AbstractHumanServer;
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.Consumes;
@@ -35,8 +34,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Path("/MaintenanceReportAdapter")
-public class MaintenanceReportAdapter extends AbstractHumanAdapter {
+@Path("/MaintenanceReportServer")
+public class MaintenanceReportServer extends AbstractHumanServer {
     Logger logger = Logger.getLogger("net.modelbased.proasense.adapter.maintenancereport.MaintenanceReport");
     String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
 
@@ -98,7 +97,7 @@ public class MaintenanceReportAdapter extends AbstractHumanAdapter {
         complexValue = new ComplexValue();
         complexValue.setValue(timeUsage);
         complexValue.setType(VariableType.DOUBLE);
-        simpleEvent.putToEventProperties("miantenanceDuration", complexValue);
+        simpleEvent.putToEventProperties("maintenanceDuration", complexValue);
 
         complexValue = new ComplexValue();
         complexValue.setValue(criticalValue);

@@ -22,7 +22,7 @@ import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
 
-import net.modelbased.proasense.adapter.human.AbstractHumanAdapter;
+import net.modelbased.proasense.adapter.human.AbstractHumanServer;
 
 import org.apache.log4j.Logger;
 
@@ -38,8 +38,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 
-@Path("/InspectionReportAdapter")
-public class InspectionReportAdapter extends AbstractHumanAdapter {
+@Path("/InspectionReportServer")
+public class InspectionReportServer extends AbstractHumanServer {
     Logger logger = Logger.getLogger("net.modelbased.proasense.adapter.inspectionreport.InspectionReport");
     String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
 
