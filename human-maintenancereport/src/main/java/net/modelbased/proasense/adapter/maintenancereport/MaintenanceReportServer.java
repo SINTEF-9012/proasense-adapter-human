@@ -45,11 +45,11 @@ public class MaintenanceReportServer extends AbstractHumanServer {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void convertToSimpleEvents(String text) throws ParseException {
-        String[] seperateValues = text.split(",");
+        String[] separateValues = text.split(",");
 
-        String rigName = seperateValues[0];
-        String date = seperateValues[1];
-        String time = seperateValues[2];
+        String rigName = separateValues[0];
+        String date = separateValues[1];
+        String time = separateValues[2];
         String dateAndTime = date+" "+time;
         DateFormat formatter = new SimpleDateFormat("dd-mm-yyyy HH:mm");
 
@@ -57,15 +57,15 @@ public class MaintenanceReportServer extends AbstractHumanServer {
         long longTime = parsedDate.getTime();
         logger.debug("dateTimer er " + dateAndTime + " long er " + longTime);
 
-        String maintenanceResponsiblePerson = seperateValues[3];
-        String equipmentType = seperateValues[4];
-        String productCode = seperateValues[5];
-        String maintenancePerformed = seperateValues[6];
-        String timeUsage = seperateValues[7];
-        String criticalValue = seperateValues[8];
-        String sustainementCost = seperateValues[9];
-        String equipmentCondition = seperateValues[10];
-        String maintenanceAccepted = seperateValues[11];
+        String maintenanceResponsiblePerson = separateValues[3];
+        String equipmentType = separateValues[4];
+        String productCode = separateValues[5];
+        String maintenancePerformed = separateValues[6];
+        String timeUsage = separateValues[7];
+        String criticalValue = separateValues[8];
+        String sustainementCost = separateValues[9];
+        String equipmentCondition = separateValues[10];
+        String maintenanceAccepted = separateValues[11];
 
         SimpleEvent simpleEvent = new SimpleEvent();
         simpleEvent.setTimestamp(longTime);
@@ -121,6 +121,7 @@ public class MaintenanceReportServer extends AbstractHumanServer {
         complexValue.setType(VariableType.STRING);
         simpleEvent.putToEventProperties("equipmentConditionAcceptance", complexValue);
 
+        this.outputPort.publishSimpleEvent(simpleEvent);
         logger.debug(simpleEvent.toString());
     }
 }
