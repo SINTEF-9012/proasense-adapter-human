@@ -278,7 +278,7 @@
     function sendRequest(values){
       var request = new XMLHttpRequest();
 
-      request.open('POST', 'http://localhost:8080/adapter/productionPlan', false);
+      request.open('POST', 'http://localhost:8080/human-productionplan/server/ProductionPlanServer', false);
       request.setRequestHeader("Content-Type", "application/json");
       request.send(values);
     }

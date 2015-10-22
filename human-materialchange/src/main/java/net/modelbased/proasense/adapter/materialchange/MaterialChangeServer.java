@@ -1,15 +1,30 @@
-package net.proasense.adapter.materialchange;
-
 /**
- * Created by shahzad on 18.08.15.
+ * Copyright (C) 2014-2015 SINTEF
+ *
+ *     Brian Elvesæter <brian.elvesater@sintef.no>
+ *     Shahzad Karamat <shazad.karamat@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+package net.modelbased.proasense.adapter.materialchange;
+
+import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -18,34 +33,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * Created by shahzad on 15.08.15.
- */
-// The Java class will be hosted at the URI path "/helloworld"
-@Path("/changeForm")
+@Path("/MaterialChangeServer")
 public class MaterialChangeServer extends AbstractBaseAdapter {
-    // The Java method will process HTTP GET requests
+    public final static Logger logger = Logger.getLogger(MaterialChangeServer.class);
 
-    protected String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
-    final static Logger LOGGER = LoggerFactory.getLogger(MaterialChangeServer.class);
+    private String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response convertToSimpleEvents(String text){
-        LOGGER.debug("sensorID er "+sensorId);
         String allValues[] = text.split(",");
 
-        //System.out.println("allValues[0] er "+allValues[0]+" allValues[1] er "+allValues[1]);
         ComplexValue complexValue = new ComplexValue();
-        // Map<String, ComplexValue> eventProperties = new HashMap<String, ComplexValue>();
         SimpleEvent simpleEvent = new SimpleEvent();
 
-        long timeStamp = System.currentTimeMillis(); //
+        long timeStamp = System.currentTimeMillis();
 
-        String machineId = allValues[0]; //
-        String materialId =allValues[1]; //
-
+        String machineId = allValues[0];
+        String materialId =allValues[1];
 
         simpleEvent.sensorId = sensorId;
         simpleEvent.timestamp = timeStamp;
@@ -61,6 +68,8 @@ public class MaterialChangeServer extends AbstractBaseAdapter {
 
         System.out.println(simpleEvent.toString());
         this.outputPort.publishSimpleEvent(simpleEvent);
+        logger.debug("SimpleEvent = " + simpleEvent.toString());
+
         return Response.status(201).entity(text).build();
     }
 }

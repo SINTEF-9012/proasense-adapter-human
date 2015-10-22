@@ -34,9 +34,10 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/MaterialCertificateServer")
 public class MaterialCertificateServer extends AbstractHumanServer {
-    final static Logger LOGGER = Logger.getLogger(MaterialCertificateServer.class);
+    public final static Logger logger = Logger.getLogger(MaterialCertificateServer.class);
 
-    protected String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+    private String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -88,5 +89,6 @@ public class MaterialCertificateServer extends AbstractHumanServer {
         simpleEvent.putToEventProperties("mvrMax", complexValue);
 
         this.outputPort.publishSimpleEvent(simpleEvent);
+        logger.debug("SimpleEvent = " + simpleEvent.toString());
     }
 }

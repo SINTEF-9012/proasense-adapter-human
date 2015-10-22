@@ -40,9 +40,9 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/InspectionReportServer")
 public class InspectionReportServer extends AbstractHumanServer {
-    Logger logger = Logger.getLogger(InspectionReportServer.class);
+    public final static Logger logger = Logger.getLogger(InspectionReportServer.class);
 
-    String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
+    private String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
 
 
     @POST

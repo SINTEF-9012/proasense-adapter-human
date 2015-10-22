@@ -1,36 +1,48 @@
-package net.proasense.adapter.productionplan;
+/**
+ * Copyright (C) 2014-2015 SINTEF
+ *
+ *     Brian Elvesæter <brian.elvesater@sintef.no>
+ *     Shahzad Karamat <shazad.karamat@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package net.modelbased.proasense.adapter.productionplan;
+
+import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-import javassist.bytecode.stackmap.TypeData;
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-/**
- * Created by shahzad on 18.08.15.
- */
 
-/**
- * Created by shahzad on 15.08.15.
- */
-
-@Path("/productionPlan")
+@Path("/ProductionPlanServer")
 public class ProductionPlanServer extends AbstractBaseAdapter {
-    // The Java method will process HTTP GET requests
+    public final static Logger logger = Logger.getLogger(ProductionPlanServer.class);
 
-    final static Logger LOGGER = LoggerFactory.getLogger(ProductionPlanServer.class);
-    HashMap<String,String> library = new HashMap<String,String>();
-    int flag = 0;
+    private HashMap<String,String> library = new HashMap<String,String>();
+    private int flag = 0;
+
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
@@ -42,7 +54,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
             flag = 1;
         }
 
-        LOGGER.debug(text);
+        logger.debug(text);
         String time_value[] = {"6:00", "14:00", "22:00", "6:00"};
         String allValues[] = text.split(",");
 
@@ -54,7 +66,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         String shiftStartTime = time_value[(Integer.parseInt(shiftid) - 1) % 3];
         String shiftEndTime = time_value[Integer.parseInt(shiftid) % 3];
 
-        LOGGER.debug(formDate + " " + shiftStartTime);
+        logger.debug(formDate + " " + shiftStartTime);
 
         long startMilliSec = convertToLong(formDate + " " + shiftStartTime, shiftid);
         long endMilliSec = convertToLong(formDate + " " + shiftEndTime, shiftid);
@@ -122,10 +134,10 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         simpleEvent.putToEventProperties("productEndTime", complexValue);
 
         this.outputPort.publishSimpleEvent(simpleEvent);
-        LOGGER.debug(simpleEvent.toString());
+        logger.debug("SimpleEvent = " + simpleEvent.toString());
     }
 
-    long convertToLong(String date, String id) {
+    private long convertToLong(String date, String id) {
 
         String splitDateTime[] = date.split(" ");
         String splitDate[] = splitDateTime[0].split("/");
@@ -150,20 +162,22 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         return dateToMilli;
     }
 
-    public String addZero(String input) {
+
+    private String addZero(String input) {
         if (input.length() == 1) return "0" + input;
         return input;
     }
 
-    String trimName(String machineId){
+
+    private String trimName(String machineId){
         String newID[];
         newID = machineId.split(" ");
         String newID2[] = newID[2].split("/");
         return newID2[0];
     }
 
-    void createLibrary(){
 
+    private void createLibrary(){
         String libValues =  "KSP155.031-00U010	BMW - 155.031/032-00	155.031-00	155.032-00 ," +
                        "KSP156.013-00U010	Clio erna - 156.013/014-00	156.013-00	156.014-00 ," +
                        "KSP156.013-01U010	Clio temno siva - 156.013/014-01	156.013-01	156.014-01 ," +
@@ -204,7 +218,6 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         for(int i = 0; i < splitLib.length; i++){
             String[] splitValues = splitLib[i].split("\\t");
             library.put(splitValues[1], splitValues[0] + "," + splitValues[2] + ","+splitValues[3]);
-            //abc
         }
     }
 }

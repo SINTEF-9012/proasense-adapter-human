@@ -13,6 +13,6 @@
         </servlet>
 <servlet-mapping>
 <servlet-name>human-materialchange</servlet-name>
-<url-pattern>/adapter/*</url-pattern>
+<url-pattern>/server/*</url-pattern>
 </servlet-mapping>
 </web-app>
