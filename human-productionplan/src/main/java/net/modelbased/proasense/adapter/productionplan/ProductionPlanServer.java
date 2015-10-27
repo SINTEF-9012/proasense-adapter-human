@@ -18,7 +18,7 @@
  */
 package net.modelbased.proasense.adapter.productionplan;
 
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+import net.modelbased.proasense.adapter.human.AbstractHumanServer2;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
@@ -26,18 +26,21 @@ import eu.proasense.internal.VariableType;
 
 import org.apache.log4j.Logger;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 @Path("/ProductionPlanServer")
-public class ProductionPlanServer extends AbstractBaseAdapter {
+public class ProductionPlanServer extends AbstractHumanServer2 {
     public final static Logger logger = Logger.getLogger(ProductionPlanServer.class);
 
     private HashMap<String,String> library = new HashMap<String,String>();
@@ -54,7 +57,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
             flag = 1;
         }
 
-        logger.debug(text);
+//        logger.debug(text);
         String time_value[] = {"6:00", "14:00", "22:00", "6:00"};
         String allValues[] = text.split(",");
 
@@ -66,7 +69,7 @@ public class ProductionPlanServer extends AbstractBaseAdapter {
         String shiftStartTime = time_value[(Integer.parseInt(shiftid) - 1) % 3];
         String shiftEndTime = time_value[Integer.parseInt(shiftid) % 3];
 
-        logger.debug(formDate + " " + shiftStartTime);
+//        logger.debug(formDate + " " + shiftStartTime);
 
         long startMilliSec = convertToLong(formDate + " " + shiftStartTime, shiftid);
         long endMilliSec = convertToLong(formDate + " " + shiftEndTime, shiftid);

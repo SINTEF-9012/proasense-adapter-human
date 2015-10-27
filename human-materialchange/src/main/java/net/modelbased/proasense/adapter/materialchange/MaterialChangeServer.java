@@ -18,7 +18,7 @@
  */
 package net.modelbased.proasense.adapter.materialchange;
 
-import net.modelbased.proasense.adapter.base.AbstractBaseAdapter;
+import net.modelbased.proasense.adapter.human.AbstractHumanServer2;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
@@ -34,7 +34,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/MaterialChangeServer")
-public class MaterialChangeServer extends AbstractBaseAdapter {
+public class MaterialChangeServer extends AbstractHumanServer2 {
     public final static Logger logger = Logger.getLogger(MaterialChangeServer.class);
 
     private String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");

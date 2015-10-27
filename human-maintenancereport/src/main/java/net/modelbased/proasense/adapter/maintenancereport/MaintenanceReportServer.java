@@ -18,10 +18,12 @@
  */
 package net.modelbased.proasense.adapter.maintenancereport;
 
+import net.modelbased.proasense.adapter.human.AbstractHumanServer2;
+
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 import eu.proasense.internal.VariableType;
-import net.modelbased.proasense.adapter.human.AbstractHumanServer;
+
 import org.apache.log4j.Logger;
 
 import javax.ws.rs.Consumes;
@@ -29,13 +31,14 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Path("/MaintenanceReportServer")
-public class MaintenanceReportServer extends AbstractHumanServer {
+public class MaintenanceReportServer extends AbstractHumanServer2 {
     public final static Logger logger = Logger.getLogger(MaintenanceReportServer.class);
 
     private String sensor_id = adapterProperties.getProperty("proasense.adapter.base.sensorid");
