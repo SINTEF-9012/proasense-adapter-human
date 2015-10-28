@@ -312,26 +312,30 @@
       $.each($('.time_value'), function() {
         time_value.push($(this).val());
       });
-
+      var finalString = "";
       var n = 0;
       for(i = 0; i < 5; i++) {
         for (shift = 0; shift < 4; shift++) {
 
           if (!((answers[n] === "Default_value") && (values[n] === ""))) {
             if (values[n] === "") {
-              sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n]);
+              //sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n]);
+              finalString += $(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n] +"&"
             } else if((answers[n] === "Default_value")){
-              sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + values[n] + "," + time_value[n]);
+              //sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + values[n] + "," + time_value[n]);
+              finalString += $(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n] +"&"
             } else {
-              sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n] + "," + values[n] + "," + time_value[n]);
+              //sendRequest($(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n] + "," + values[n] + "," + time_value[n]);
+              finalString += $(formDate).val()+","+names[i] + "," + (shift + 1) + "," + answers[n] +"&"
             }
           }
           n++;
         }
-
       }
        // document.getElementById("Production_plan_form").reset();
      // location.reload();
+      sendRequest(finalString);
+      alert("ferdig");
       })
     })
 

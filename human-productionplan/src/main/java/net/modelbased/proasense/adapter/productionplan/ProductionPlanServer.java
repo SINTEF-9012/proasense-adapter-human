@@ -49,8 +49,21 @@ public class ProductionPlanServer extends AbstractHumanServer2 {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON})
+    public void readyValuesForSimpleEvents(String text){
+
+        String trimText = text.substring(0, text.length()-1);
+        String[] simpleEventValues = trimText.split("&");
+
+        for(int i = 0; i < simpleEventValues.length; i++){
+            convertToSimpleEvents(simpleEventValues[i]);
+        }
+    }
+
     public void convertToSimpleEvents(String text) {
+
+        System.out.println(text);
+
 
         if(flag == 0){
             createLibrary();
@@ -136,7 +149,8 @@ public class ProductionPlanServer extends AbstractHumanServer2 {
         complexValue.setType(VariableType.LONG);
         simpleEvent.putToEventProperties("productEndTime", complexValue);
 
-        this.outputPort.publishSimpleEvent(simpleEvent);
+      //  this.outputPort.publishSimpleEvent(simpleEvent);
+        System.out.println(simpleEvent.toString());
         logger.debug("SimpleEvent = " + simpleEvent.toString());
     }
 
