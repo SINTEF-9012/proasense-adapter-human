@@ -149,8 +149,7 @@ public class ProductionPlanServer extends AbstractHumanServer2 {
         complexValue.setType(VariableType.LONG);
         simpleEvent.putToEventProperties("productEndTime", complexValue);
 
-      //  this.outputPort.publishSimpleEvent(simpleEvent);
-        System.out.println(simpleEvent.toString());
+        this.outputPort.publishSimpleEvent(simpleEvent);
         logger.debug("SimpleEvent = " + simpleEvent.toString());
     }
 
