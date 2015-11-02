@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-public abstract class AbstractHumanServer2 extends AbstractBaseAdapter {
+public abstract class AbstractHumanServer2 extends AbstractBaseAdapter2 {
 
 	public AbstractHumanServer2(){
 	}
