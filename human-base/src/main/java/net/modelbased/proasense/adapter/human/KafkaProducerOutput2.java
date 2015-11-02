@@ -21,7 +21,11 @@ package net.modelbased.proasense.adapter.human;
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
 
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+
 import org.apache.thrift.TException;
 import org.apache.thrift.TSerializer;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -35,7 +39,7 @@ public class KafkaProducerOutput2 {
     private String topic;
     private String sensorId;
     private Boolean publish;
-    private org.apache.kafka.clients.producer.KafkaProducer<String, byte[]> producer;
+    private Producer<String, byte[]> producer;
 
 
 	public KafkaProducerOutput2(String bootstrapServers, String topic, String sensorId, Boolean publish) {
@@ -50,18 +54,21 @@ public class KafkaProducerOutput2 {
     }
 
 
-    private org.apache.kafka.clients.producer.KafkaProducer<String, byte[]> createProducer(String bootstrapServers) {
+    private Producer<String, byte[]> createProducer(String bootstrapServers) {
         // Specify producer properties
         Properties props = new Properties();
         props.put("metadata.broker.list", bootstrapServers);
 //        props.put("bootstrap.servers", bootstrapServers);
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
+//        props.put("reconnect.backoff.ms", "1000");
         props.put("request.required.acks", "1");
-        props.put("producer.type", "async");
+
+        ProducerConfig config = new ProducerConfig(props);
 
         // Define the producer object
-        org.apache.kafka.clients.producer.KafkaProducer<String, byte[]> producer = new org.apache.kafka.clients.producer.KafkaProducer<String, byte[]>(props);
+        Producer<String, byte[]> producer = new Producer<String, byte[]>(config);
+//        org.apache.kafka.clients.producer.KafkaProducer<String, byte[]> producer = new org.apache.kafka.clients.producer.KafkaProducer<String, byte[]>(props);
 
         return producer;
     }
@@ -80,7 +87,8 @@ public class KafkaProducerOutput2 {
 
             // Publish message
             if (this.publish) {
-                ProducerRecord<String, byte[]> message = new ProducerRecord<String, byte[]>(topic, "adapterkey", bytes);
+                KeyedMessage<String, byte[]> message = new KeyedMessage<String, byte[]>("adapterkey", bytes);
+//                ProducerRecord<String, byte[]> message = new ProducerRecord<String, byte[]>(topic, "adapterkey", bytes);
                 this.producer.send(message);
             }
         }
