@@ -5,6 +5,7 @@ Human sensor adapter for the Sensing Architecture developed in the ProaSense pro
 * Internet access.
 * Maven
 * Internet browser.
+* Java 1.7 or above.
 
 ## Modules
  * There are six modules in proasense-adapter-human folder, five of them will be used as application, being:
