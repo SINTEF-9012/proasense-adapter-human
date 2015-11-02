@@ -58,11 +58,15 @@ public class KafkaProducerOutput2 {
         // Specify producer properties
         Properties props = new Properties();
         props.put("metadata.broker.list", bootstrapServers);
-//        props.put("bootstrap.servers", bootstrapServers);
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
-//        props.put("reconnect.backoff.ms", "1000");
         props.put("request.required.acks", "1");
+        props.put("producer.type", "sync");
+        props.put("serializer.class", "kafka.serializer.DefaultEncoder");
+        props.put("key.serializer.class", "kafka.serializer.StringEncoder");
+        props.put("partitioner.class", "kafka.producer.DefaultPartitioner");
+//        props.put("bootstrap.servers", bootstrapServers);
+//        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+//        props.put("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
+//        props.put("reconnect.backoff.ms", "1000");
 
         ProducerConfig config = new ProducerConfig(props);
 
@@ -87,7 +91,7 @@ public class KafkaProducerOutput2 {
 
             // Publish message
             if (this.publish) {
-                KeyedMessage<String, byte[]> message = new KeyedMessage<String, byte[]>("adapterkey", bytes);
+                KeyedMessage<String, byte[]> message = new KeyedMessage<String, byte[]>(topic, "adapterkey", bytes);
 //                ProducerRecord<String, byte[]> message = new ProducerRecord<String, byte[]>(topic, "adapterkey", bytes);
                 this.producer.send(message);
             }
