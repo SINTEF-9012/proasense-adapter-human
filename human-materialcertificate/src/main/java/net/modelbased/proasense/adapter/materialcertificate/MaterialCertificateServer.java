@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2014-2015 SINTEF
  *
- *     Brian Elvesæter <brian.elvesater@sintef.no>
+ *     Brian ElvesÃ¦ter <brian.elvesater@sintef.no>
  *     Shahzad Karamat <shazad.karamat@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,7 @@
  */
 package net.modelbased.proasense.adapter.materialcertificate;
 
-import net.modelbased.proasense.adapter.human.AbstractHumanServer2;
+import net.modelbased.proasense.adapter.human.AbstractHumanServer;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
@@ -33,7 +33,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/MaterialCertificateServer")
-public class MaterialCertificateServer extends AbstractHumanServer2 {
+public class MaterialCertificateServer extends AbstractHumanServer {
     public final static Logger logger = Logger.getLogger(MaterialCertificateServer.class);
 
     private String sensorId = adapterProperties.getProperty("proasense.adapter.base.sensorid");

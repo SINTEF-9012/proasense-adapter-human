@@ -18,7 +18,7 @@
  */
 package net.modelbased.proasense.adapter.productionplan;
 
-import net.modelbased.proasense.adapter.human.AbstractHumanServer2;
+import net.modelbased.proasense.adapter.human.AbstractHumanServer;
 
 import eu.proasense.internal.ComplexValue;
 import eu.proasense.internal.SimpleEvent;
@@ -40,7 +40,7 @@ import javax.ws.rs.core.MediaType;
 
 
 @Path("/ProductionPlanServer")
-public class ProductionPlanServer extends AbstractHumanServer2 {
+public class ProductionPlanServer extends AbstractHumanServer {
     public final static Logger logger = Logger.getLogger(ProductionPlanServer.class);
 
     private HashMap<String,String> library = new HashMap<String,String>();
