@@ -40,7 +40,7 @@
         <dependency>
             <groupId>com.github.SINTEF-9012</groupId>
             <artifactId>proasense-adapter-base</artifactId>
-            <version>26aaa2afcf981daa9463514ab2081bfe4f6e6db4</version>
+            <version>deb40c5f434235827d69fb48806acacee613bfc9</version>
         </dependency>
         <dependency>
             <groupId>eu.proasense.internal</groupId>
@@ -97,6 +97,18 @@
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 <!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
