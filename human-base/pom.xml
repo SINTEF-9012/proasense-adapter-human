@@ -22,11 +22,6 @@
             <artifactId>proasense-adapter-base</artifactId>
             <version>93c7eff5846a25d258c49f38de0afea6e886fcb3</version>
         </dependency>
-<!--        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.0.1</version>
-        </dependency>-->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-bundle</artifactId>
@@ -45,7 +40,7 @@
     </dependencies>
 
     <build>
-        <finalName>proasense-adapter-human</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
