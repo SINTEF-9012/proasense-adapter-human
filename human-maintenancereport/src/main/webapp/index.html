@@ -134,7 +134,7 @@
 
     function sendRequest(field_values){
       var request = new XMLHttpRequest();
-      request.open('POST', 'http://localhost:8080/human-maintenancereport/server/MaintenanceReportServer', false);
+      request.open('POST', 'http://proasense.nissatech.com/human-maintenancereport/server/MaintenanceReportServer', false);
       request.setRequestHeader("Content-Type", "application/json");
       request.send(field_values);
     }
