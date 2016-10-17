@@ -30,3 +30,18 @@ services:
 #    environment:
 #      - ZOOKEEPER_CONNECT=kafka_host:2181
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka_host:9092
+  human-materialcertificate:
+    build: human-materialcertificate/
+    container_name: human-materialcertificate
+    ports:
+      - "8093:8080"
+  human-materialchange:
+    build: human-materialchange/
+    container_name: human-materialchange
+    ports:
+      - "8094:8080"
+  human-productionplan:
+    build: human-productionplan/
+    container_name: human-productionplan
+    ports:
+      - "8095:8080"
