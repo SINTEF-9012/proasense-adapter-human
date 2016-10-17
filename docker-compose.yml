@@ -1,32 +1,32 @@
 version: '2'
 services:
-  kafka:
-    container_name: kafka
-    image: spotify/kafka
-    ports:
-      - "2181:2181"
-      - "9092:9092"
+#  kafka:
+#    container_name: kafka
+#    image: spotify/kafka
+#    ports:
+#      - "2181:2181"
+#      - "9092:9092"
   human-inspectionreport:
     build: human-inspectionreport/
     container_name: human-inspectionreport
-    depends_on:
-      - kafka
+#    depends_on:
+#      - kafka
     ports:
-      - "8084:8080"
-    links:
-      - kafka:kafka_host
+      - "8091:8080"
+#    links:
+#      - kafka:kafka_host
 #    environment:
 #      - ZOOKEEPER_CONNECT=kafka_host:2181
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka_host:9092
   human-maintenancereport:
     build: human-maintenancereport/
     container_name: human-maintenancereport
-    depends_on:
-      - kafka
+#    depends_on:
+#      - kafka
     ports:
-      - "8085:8080"
-    links:
-      - kafka:kafka_host
+      - "8092:8080"
+#    links:
+#      - kafka:kafka_host
 #    environment:
 #      - ZOOKEEPER_CONNECT=kafka_host:2181
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka_host:9092
