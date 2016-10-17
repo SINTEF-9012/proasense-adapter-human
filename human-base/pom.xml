@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.github.SINTEF-9012</groupId>
             <artifactId>proasense-adapter-base</artifactId>
-            <version>93c7eff5846a25d258c49f38de0afea6e886fcb3</version>
+            <version>deb40c5f434235827d69fb48806acacee613bfc9</version>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
