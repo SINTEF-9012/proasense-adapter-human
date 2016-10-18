@@ -88,7 +88,8 @@
     function sendRequest(field_values){
       var request = new XMLHttpRequest();
 
-      request.open('POST', 'http://win7proxmox1v.hss.hella.com:8080/human-materialcertificate/server/MaterialCertificateServer', false);
+//      request.open('POST', 'http://win7proxmox1v.hss.hella.com:8080/human-materialcertificate/server/MaterialCertificateServer', false);
+      request.open('POST', 'http://192.168.84.41:8093/human-materialcertificate/server/MaterialCertificateServer', false);
       request.setRequestHeader("Content-Type", "application/json");
       request.send(field_values);
     }
