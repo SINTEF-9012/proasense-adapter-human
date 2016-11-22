@@ -13,11 +13,6 @@ services:
 #      - kafka
     ports:
       - "8091:8080"
-#    links:
-#      - kafka:kafka_host
-#    environment:
-#      - ZOOKEEPER_CONNECT=kafka_host:2181
-#      - KAFKA_BOOTSTRAP_SERVERS=kafka_host:9092
   human-maintenancereport:
     build: human-maintenancereport/
     container_name: human-maintenancereport
@@ -25,23 +20,24 @@ services:
 #      - kafka
     ports:
       - "8092:8080"
-#    links:
-#      - kafka:kafka_host
-#    environment:
-#      - ZOOKEEPER_CONNECT=kafka_host:2181
-#      - KAFKA_BOOTSTRAP_SERVERS=kafka_host:9092
   human-materialcertificate:
     build: human-materialcertificate/
     container_name: human-materialcertificate
+#    depends_on:
+#      - kafka
     ports:
       - "8093:8080"
   human-materialchange:
     build: human-materialchange/
     container_name: human-materialchange
+#    depends_on:
+#      - kafka
     ports:
       - "8094:8080"
   human-productionplan:
     build: human-productionplan/
     container_name: human-productionplan
+#    depends_on:
+#      - kafka
     ports:
       - "8095:8080"
